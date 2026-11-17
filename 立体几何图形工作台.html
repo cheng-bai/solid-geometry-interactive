@@ -1,0 +1,262 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><title>立体几何题型图形工作台</title><style>
+:root{--paper:#f3f2ed;--white:#fffefa;--ink:#223e33;--muted:#68796f;--border:#d4ddd3;--accent:#27694e;--pale:#e8eee5}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.7 "PingFang SC","Noto Sans CJK SC",sans-serif}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,#stage:focus-visible{outline:3px solid #bd8846;outline-offset:3px}.wrap{max-width:1240px;margin:auto;padding:30px 34px}.mast{display:flex;align-items:center;gap:13px;border-bottom:1px solid var(--border);padding-bottom:17px;font-size:12px;letter-spacing:1.4px}.mast span:last-child{margin-left:auto;font-size:11px;letter-spacing:.2px;color:var(--muted)}header{padding:32px 0 25px;display:flex;justify-content:space-between;gap:20px;align-items:end}.eyebrow{color:var(--accent);font-size:11px;letter-spacing:2px}h1{font:500 36px/1.4 "Songti SC",serif;margin:8px 0}header p{margin:0;color:var(--muted);font-size:13px}.count{font:48px/1 Georgia,serif;color:#90a38e;white-space:nowrap}.count small{font:11px "PingFang SC",sans-serif}.workspace{display:grid;grid-template-columns:minmax(0,1fr) 305px;background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden}.viewer{min-width:0;padding:22px 25px}.viewer-head{display:flex;align-items:start;justify-content:space-between;gap:12px}.viewer h2{font:500 24px "Songti SC",serif;margin:0 0 5px}.code{font:11px ui-monospace,monospace;color:var(--muted)}.chip{font-size:10px;background:var(--pale);padding:3px 9px;border-radius:4px;white-space:nowrap}#stage{width:100%;aspect-ratio:700/460;min-height:280px;display:flex;align-items:center;justify-content:center;cursor:grab;touch-action:none}#stage:active{cursor:grabbing}#stage svg{width:100%;height:auto;max-height:500px;display:block}.metrics{display:flex;border-top:1px solid var(--border);gap:30px;padding-top:15px}.metric span{display:block;color:var(--muted);font-size:11px}.metric strong{font:23px Georgia,serif;font-weight:400}.metric small{font:11px "PingFang SC",sans-serif;color:var(--muted);margin-left:5px}#classification{font-size:11px;margin-left:auto;align-self:center;color:var(--accent);max-width:160px}.controls{background:#edf1e9;border-left:1px solid var(--border);padding:21px 20px}.controls h3{font-size:12px;font-weight:500;letter-spacing:1px;color:var(--muted);margin:0 0 12px}.parameter{display:grid;grid-template-columns:1fr 72px;align-items:center;gap:3px 9px;margin-bottom:12px;font-size:12px}.parameter input[type=range]{grid-column:1/-1;width:100%;accent-color:var(--accent)}input[type=number]{width:72px;border:1px solid var(--border);border-radius:4px;padding:3px 5px;background:var(--white);color:var(--ink);font-size:12px}.divider{border-top:1px solid var(--border);margin:18px 0}.view-row{display:grid;grid-template-columns:42px 1fr 42px;gap:8px;align-items:center;font-size:11px;margin:8px 0}.view-row input{width:100%;accent-color:var(--accent)}.view-row output{text-align:right;color:var(--muted)}.checks{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:11px}.checks input{accent-color:var(--accent)}.buttons{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px}.buttons button,.exports button{padding:6px 10px;border:1px solid var(--border);border-radius:5px;background:var(--white);color:var(--ink);font-size:11px}.buttons .primary{background:var(--accent);border-color:var(--accent);color:white}.teaching{padding:20px 24px;border:1px solid var(--border);border-top:none;border-radius:0 0 9px 9px;background:#fafaf5}.teaching>p{font-size:12px;margin:0 0 10px}#approximation{font-size:11px;color:var(--muted)}#formula{display:flex;gap:30px;flex-wrap:wrap;margin:8px 0}#formula section{min-width:0;max-width:100%}#formula h3{font-size:11px;font-weight:400;color:var(--muted);margin:4px 0}.math-scroll{overflow-x:auto;max-width:100%;padding:8px 2px}math{font-family:"STIX Two Math","Cambria Math",math;font-size:17px}math[display=block]{margin:0;text-align:left}#formula math{font-size:19px}.exports{display:flex;flex-wrap:wrap;gap:7px;margin-top:13px}#status{font-size:11px;color:var(--muted);margin:12px 0 0}#status[data-error=true]{color:#a2472c}#link-box{margin-top:10px}#link-value{width:100%;font-size:11px;padding:8px;border:1px solid var(--border)}.catalog-head{display:flex;justify-content:space-between;align-items:center;margin-top:35px;margin-bottom:15px;gap:20px}.catalog-head h2{font:22px "Songti SC",serif;margin:0}.filters{display:flex;gap:5px;flex-wrap:wrap}.filters button{border:none;color:var(--muted);background:transparent;font-size:11px;padding:5px 9px;border-radius:4px}.filters button[aria-pressed=true]{background:var(--ink);color:white}#catalog{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.asset-card{padding:10px 12px 14px;text-align:left;border:1px solid var(--border);border-radius:7px;background:var(--white);color:var(--ink);min-width:0}.asset-card[aria-pressed=true]{border:2px solid var(--accent);padding:9px 11px 13px;background:#f7faf3}.asset-card svg{width:100%;height:145px;display:block}.asset-card span{display:block;font-size:12px}.asset-card small{font:10px ui-monospace,monospace;color:var(--muted)}footer{font-size:11px;color:var(--muted);margin-top:24px;padding-top:14px;border-top:1px solid var(--border)}@media(max-width:850px){.workspace{grid-template-columns:1fr 260px}.wrap{padding:24px}#catalog{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:650px){.wrap{padding:18px 14px}.mast{font-size:10px;letter-spacing:.5px}.mast span:last-child{font-size:9px}header{padding:24px 0 18px}h1{font-size:28px}.count{display:none}.workspace{grid-template-columns:1fr}.controls{border-left:none;border-top:1px solid var(--border)}.viewer{padding:18px 14px}#stage{min-height:240px}#classification{font-size:10px;max-width:110px}.metrics{gap:20px}.metric strong{font-size:21px}.teaching{padding:17px 14px}.catalog-head{flex-direction:column;align-items:start;gap:10px}#catalog{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.asset-card{padding:6px 9px 12px}.asset-card svg{height:115px}.asset-card[aria-pressed=true]{padding:5px 8px 11px}.asset-card span{font-size:11px}.asset-card small{font-size:9px}.viewer h2{font-size:21px}.metric small{font-size:10px}.metrics{flex-wrap:wrap}.parameter{margin-bottom:10px}.parameter input[type=range]{min-height:20px}.checks label{min-height:30px}}
+@media print{.controls,.exports,.catalog-head,#catalog,#link-box{display:none}.workspace{display:block}.viewer{width:100%}.wrap{padding:0}footer{font-size:10px}}
+.construction-controls{border-bottom:1px solid #d4ddd3;margin-bottom:14px;padding-bottom:12px}.construction-controls select{width:100%;padding:7px;border:1px solid #b5c7b9;border-radius:4px;background:white;color:#223e33;font:inherit}.construction-controls label{display:block;font-size:12px;margin:8px 0}.construction-controls input{width:100%}.construction-controls p{font-size:12px;color:#526b5c;margin:8px 0 0}.construction-controls [hidden]{display:none}
+.workspace{grid-template-columns:minmax(0,1fr) minmax(270px,340px);align-items:start}.controls{max-height:min(720px,80vh);overflow-y:auto;overscroll-behavior:contain}.catalog-head{display:block;margin:0 0 8px}.catalog-head h2{font-size:16px;margin:0 0 8px}.filters{gap:2px}.filters button{padding:4px 6px}.controls #catalog{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;max-height:250px;overflow-y:auto;margin-bottom:16px}.controls .asset-card,.controls .asset-card[aria-pressed=true]{padding:5px 6px;text-align:center}.controls .asset-card svg{height:72px}.controls .asset-card small{display:none}
+@media(max-width:650px){.workspace{grid-template-columns:minmax(0,1fr) minmax(150px,43%)}.controls{border-top:0;border-left:1px solid var(--border);padding:12px 9px;max-height:75vh}.viewer{padding:12px 8px;position:sticky;top:0}.viewer-head{display:block}.viewer h2{font-size:18px}.chip{display:none}#stage{min-height:145px}.metrics{gap:8px}.metric strong{font-size:16px}.metric small,#classification{display:none}.construction-controls select{font-size:12px}.controls #catalog{grid-template-columns:1fr;max-height:180px}.controls .asset-card svg{height:58px}.catalog-head h2{font-size:14px}.filters button{font-size:10px}.controls .view-row{grid-template-columns:30px minmax(0,1fr) 32px;gap:3px}.controls .parameter{grid-template-columns:minmax(0,1fr) 55px}.controls input[type=number]{width:55px}.checks{grid-template-columns:1fr}}
+@media print{.workspace{display:block}.viewer{position:static}}</style></head><body><main class="wrap"><div class="mast"><span>ANATOMY / MATH SCENE LAB</span><span>可复用教学资产 · 1.0.0</span></div><header><div><div class="eyebrow">GEOMETRY ASSET LIBRARY</div><h1>立体几何 · 题型图形工作台</h1><p>参数化模型、独立矢量图与离线交互。选一个几何体，即可开始复用。</p></div><div class="count">14 <small>类基础资产</small></div></header>
+<section class="workspace"><div class="viewer"><div class="viewer-head"><div><h2 id="solid-name"></h2><div class="code" id="solid-code"></div></div><span class="chip">正交投影 · 可旋转</span></div><div id="stage" tabindex="0" role="region" aria-label="几何体视图，拖动或按方向键旋转"></div><div class="metrics"><div class="metric"><span>体积 V</span><strong id="volume"></strong><small>立方单位</small></div><div class="metric"><span>总表面积 S</span><strong id="area"></strong><small>平方单位</small></div><span id="classification"></span></div></div>
+<aside class="controls"><h3>数学参数</h3><div id="parameters"></div><div class="divider"></div><h3>观察视角</h3><label class="view-row">方位<input id="yaw" aria-label="方位角" type="range" min="-3.141592653589793" max="3.141592653589793" step="any"><output id="yaw-value"></output></label><label class="view-row">俯仰<input id="pitch" aria-label="俯仰角" type="range" min="-1.35" max="1.35" step="any"><output id="pitch-value"></output></label><label class="view-row">缩放<input id="zoom" aria-label="缩放" type="range" min=".5" max="1.5" step="any"><output id="zoom-value"></output></label><div class="buttons"><button id="front">正视图</button><button id="default-view">默认视角</button><button class="primary" id="reset">重置当前资产</button></div><div class="divider"></div><h3>讲解显示</h3><div class="checks"><label><input id="faces" type="checkbox" checked>面着色</label><label><input id="hidden" type="checkbox" checked>隐藏边</label><label><input id="labels" type="checkbox" checked>顶点名</label><label><input id="axis" type="checkbox" checked>辅助轴线</label></div></aside></section>
+<section class="teaching"><p id="note"></p><div id="formula"></div><p id="approximation"></p><p class="subtle" style="color:var(--muted);font-size:11px">长度使用统一任意单位。球的虚线圆是辅助大圆；屏幕中的投影长度、角度不代表空间真实量。数值约取六位有效数字。</p><div class="exports"><button id="svg-export">导出当前 SVG</button><button id="json-export">导出模型 JSON</button><button id="state-export">导出状态 JSON</button><button id="link">生成状态链接</button></div><p id="status" role="status"></p><div id="link-box" hidden><input id="link-value" aria-label="状态链接" readonly></div></section>
+<section id="asset-picker"><div class="catalog-head"><h2>选择几何体</h2><div class="filters" role="group" aria-label="筛选资产"><button data-group="全部" aria-pressed="true">全部</button><button data-group="棱柱" aria-pressed="false">棱柱</button><button data-group="棱锥与棱台" aria-pressed="false">棱锥与棱台</button><button data-group="旋转体" aria-pressed="false">旋转体</button><button data-group="正多面体" aria-pressed="false">正多面体</button></div></div><div id="catalog"></div></section><footer>模型、视角与讲解状态独立保存 · 无远程依赖 · SVG 可直接用于讲义或课件 · 曲面采用多边形近似显示，测度使用解析公式</footer></main>
+<script>window.SOLIDS_INITIAL="cube";</script><script type="module">// Analytic solid models; no renderer or browser dependency. Length units are arbitrary but consistent.
+const sqrt=Math.sqrt, PI=Math.PI;
+const param=(label,symbol,value,min=.25,max=6)=>({label,symbol,default:value,min,max,step:.05});
+const catalog=[
+ {id:'cube',name:'正方体',group:'棱柱',params:{a:param('棱长','a',2)},note:'六个面都是正方形；相邻棱互相垂直。'},
+ {id:'cuboid',name:'长方体',group:'棱柱',params:{a:param('长','a',3),b:param('宽','b',2),c:param('高','c',2.5)},note:'三个相邻棱长可以独立改变。'},
+ {id:'triangular-prism',name:'直三棱柱（正三角形底）',group:'棱柱',params:{a:param('底边长','a',2.4),h:param('高','h',3)},note:'本资产的底面限定为正三角形，侧棱垂直于底面。'},
+ {id:'hexagonal-prism',name:'正六棱柱',group:'棱柱',params:{a:param('底边长','a',1.5),h:param('高','h',2.5)},note:'底面为正六边形，侧棱垂直于底面。'},
+ {id:'oblique-prism',name:'斜四棱柱（矩形底）',group:'棱柱',params:{a:param('底面长','a',3),b:param('底面宽','b',2),h:param('垂直高','h',2.5),dx:param('上底横向平移','dx',1,-3,3),dy:param('上底纵向平移','dy',.4,-3,3)},note:'侧棱长通常不等于高；平移为零时成为直棱柱。'},
+ {id:'tetrahedron',name:'正四面体',group:'棱锥与棱台',params:{a:param('棱长','a',3)},note:'四个面都是正三角形，六条棱等长；高度由棱长确定。'},
+ {id:'square-pyramid',name:'正四棱锥',group:'棱锥与棱台',params:{a:param('底边长','a',3),h:param('高','h',3)},note:'底面为正方形，顶点在底面中心的垂线上；斜高与侧棱不同。'},
+ {id:'square-frustum',name:'正四棱台',group:'棱锥与棱台',params:{a:param('下底边长','a',3.5),b:param('上底边长','b',1.8,0,6),h:param('高','h',2.5)},note:'上下底对应边平行且同心；上底边为零时是棱锥极限，相等时是棱柱极限。'},
+ {id:'cylinder',name:'圆柱',group:'旋转体',params:{R:param('半径','R',1.5),h:param('高','h',3)},note:'本资产为直圆柱；底面积与高共同确定体积。'},
+ {id:'cone',name:'圆锥',group:'旋转体',params:{R:param('底面半径','R',1.8),h:param('高','h',3)},note:'本资产为直圆锥；母线长由半径和高确定。'},
+ {id:'cone-frustum',name:'圆台',group:'旋转体',params:{R:param('下底半径','R',2),r:param('上底半径','r',1,0,6),h:param('高','h',2.5)},note:'上下底同轴；上底半径为零时是圆锥极限，相等时是圆柱极限。'},
+ {id:'sphere',name:'球',group:'旋转体',params:{R:param('半径','R',2)},note:'体积和表面积按解析公式计算；绘制时用曲面分段近似。'},
+ {id:'hemisphere',name:'半球',group:'旋转体',params:{R:param('半径','R',2)},note:'总表面积包含底面圆盘，曲面面积另列。'},
+ {id:'octahedron',name:'正八面体',group:'正多面体',params:{a:param('棱长','a',2.5)},note:'八个面都是正三角形；六个顶点，十二条棱。'},
+];
+const defaults=id=>Object.fromEntries(getSpec(id).params?Object.entries(getSpec(id).params).map(([k,p])=>[k,p.default]):[]);
+function getSpec(id){const s=catalog.find(s=>s.id===id);if(!s)throw new RangeError('未知几何体：'+id);return s;}
+const sub=(a,b)=>a.map((v,i)=>v-b[i]);
+const dot=(a,b)=>a.reduce((s,v,i)=>s+v*b[i],0);
+const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+const length=v=>Math.hypot(...v);
+const mean=vs=>vs[0].map((_,i)=>vs.reduce((s,p)=>s+p[i],0)/vs.length);
+function oriented(vertices,faces){const center=mean(vertices);return faces.map(f=>{const n=cross(sub(vertices[f[1]],vertices[f[0]]),sub(vertices[f[2]],vertices[f[0]]));return dot(n,sub(mean(f.map(i=>vertices[i])),center))<0?[...f].reverse():f;});}
+function prism(base,h,shift=[0,0],ratio=1){const n=base.length,vertices=[...base.map(([x,y])=>[x,y,0])],faces=[];
+ if(ratio===0){vertices.push([shift[0],shift[1],h]);faces.push([...Array(n).keys()]);for(let i=0;i<n;i++)faces.push([i,(i+1)%n,n]);}
+ else{vertices.push(...base.map(([x,y])=>[x*ratio+shift[0],y*ratio+shift[1],h]));faces.push([...Array(n).keys()],[...Array(n).keys()].map(i=>i+n));for(let i=0;i<n;i++)faces.push([i,(i+1)%n,(i+1)%n+n,i+n]);}
+ return {vertices,faces};}
+const rectangle=(a,b)=>[[-a/2,-b/2],[a/2,-b/2],[a/2,b/2],[-a/2,b/2]];
+const regular=(n,a)=>Array.from({length:n},(_,i)=>{const t=2*PI*i/n+PI/2,r=a/(2*Math.sin(PI/n));return [r*Math.cos(t),r*Math.sin(t)];});
+function revolution(layers,segments){const vertices=[],rings=[],faces=[];
+ for(const [r,z] of layers){if(r===0){rings.push([vertices.length]);vertices.push([0,0,z]);}else{rings.push(Array.from({length:segments},(_,i)=>{const t=2*PI*i/segments;vertices.push([r*Math.cos(t),r*Math.sin(t),z]);return vertices.length-1;}));}}
+ for(let k=0;k<rings.length-1;k++){const a=rings[k],b=rings[k+1];for(let i=0;i<segments;i++){const j=(i+1)%segments;if(a.length===1)faces.push([a[0],b[i],b[j]]);else if(b.length===1)faces.push([a[i],a[j],b[0]]);else faces.push([a[i],a[j],b[j],b[i]]);}}
+ for(const ring of [rings[0],rings.at(-1)])if(ring.length>1)faces.push([...ring]);
+ return {vertices,faces,rings};}
+function createSolid(id,input={},options={}){
+ const spec=getSpec(id),p=defaults(id);
+ for(const [k,v] of Object.entries(input)){if(!Object.hasOwn(p,k))throw new RangeError('未知参数：'+k);if(typeof v!=='number'||!Number.isFinite(v))throw new TypeError('参数必须为有限数：'+k);p[k]=v;}
+ for(const [k,v] of Object.entries(p))if((k==='dx'||k==='dy')?false:(k==='r'||(id==='square-frustum'&&k==='b'))?v<0:v<=0)throw new RangeError('长度参数越界：'+k);
+ if(id==='cone-frustum'&&p.r>p.R)throw new RangeError('上底半径 r 不得大于下底半径 R');
+ if(id==='square-frustum'&&p.b>p.a)throw new RangeError('上底边长 b 不得大于下底边长 a');
+ const seg=options.segments??64;if(!Number.isInteger(seg)||seg<12||seg>256)throw new RangeError('segments 必须为 12–256 的整数');
+ let mesh,volume,area,lateralArea=null,curved=false,featureRings=[],classification=spec.name;
+ const {a,b,c,h,R,r,dx,dy}=p;
+ switch(id){
+ case 'cube':mesh=prism(rectangle(a,a),a);volume=a**3;area=6*a*a;break;
+ case 'cuboid':mesh=prism(rectangle(a,b),c);volume=a*b*c;area=2*(a*b+b*c+c*a);break;
+ case 'triangular-prism':mesh=prism(regular(3,a),h);volume=sqrt(3)/4*a*a*h;lateralArea=3*a*h;area=lateralArea+sqrt(3)/2*a*a;break;
+ case 'hexagonal-prism':mesh=prism(regular(6,a),h);volume=3*sqrt(3)/2*a*a*h;lateralArea=6*a*h;area=lateralArea+3*sqrt(3)*a*a;break;
+ case 'oblique-prism':mesh=prism(rectangle(a,b),h,[dx,dy]);volume=a*b*h;lateralArea=2*a*Math.hypot(h,dy)+2*b*Math.hypot(h,dx);area=lateralArea+2*a*b;classification=(dx===0&&dy===0)?'直四棱柱（矩形底）':'斜四棱柱（矩形底）';break;
+ case 'tetrahedron':mesh=prism(regular(3,a),a*sqrt(2/3),[0,0],0);volume=a**3/(6*sqrt(2));area=sqrt(3)*a*a;break;
+ case 'square-pyramid':mesh=prism(rectangle(a,a),h,[0,0],0);volume=a*a*h/3;lateralArea=2*a*Math.hypot(h,a/2);area=a*a+lateralArea;break;
+ case 'square-frustum':mesh=prism(rectangle(a,a),h,[0,0],b/a);volume=h*(a*a+a*b+b*b)/3;lateralArea=2*(a+b)*Math.hypot(h,(a-b)/2);area=a*a+b*b+lateralArea;classification=b===0?'正四棱锥（棱台极限）':b===a?'正四棱柱（棱台极限）':spec.name;break;
+ case 'cylinder':mesh=revolution([[R,0],[R,h]],seg);volume=PI*R*R*h;lateralArea=2*PI*R*h;area=lateralArea+2*PI*R*R;curved=true;featureRings=mesh.rings;break;
+ case 'cone':mesh=revolution([[R,0],[0,h]],seg);volume=PI*R*R*h/3;lateralArea=PI*R*Math.hypot(R,h);area=lateralArea+PI*R*R;curved=true;featureRings=[mesh.rings[0]];break;
+ case 'cone-frustum':mesh=revolution([[R,0],[r,h]],seg);volume=PI*h*(R*R+R*r+r*r)/3;lateralArea=PI*(R+r)*Math.hypot(h,R-r);area=lateralArea+PI*(R*R+r*r);curved=true;featureRings=mesh.rings.filter(q=>q.length>1);classification=r===0?'圆锥（圆台极限）':r===R?'圆柱（圆台极限）':spec.name;break;
+ case 'sphere':case 'hemisphere':{
+ const half=id==='hemisphere',latSteps=half?16:32,layers=[];
+ for(let i=0;i<=latSteps;i++){const t=half?PI*i/(2*latSteps):-PI/2+PI*i/latSteps;layers.push([(i===latSteps||(!half&&i===0))?0:R*Math.cos(t),R*Math.sin(t)]);}
+ mesh=revolution(layers,seg);volume=(half?2:4)*PI*R**3/3;lateralArea=(half?2:4)*PI*R*R;area=(half?3:4)*PI*R*R;curved=true;featureRings=[mesh.rings[half?0:16]];break;}
+ case 'octahedron':{const t=a/sqrt(2);mesh={vertices:[[t,0,0],[-t,0,0],[0,t,0],[0,-t,0],[0,0,t],[0,0,-t]],faces:[]};for(const x of [0,1])for(const y of [2,3])for(const z of [4,5])mesh.faces.push([x,y,z]);volume=sqrt(2)*a**3/3;area=2*sqrt(3)*a*a;break;}
+ }
+ if(![volume,area,...mesh.vertices.flat()].every(Number.isFinite)||volume<=0||area<=0)throw new RangeError('尺寸导致浮点溢出或下溢，无法可靠建模');
+ mesh.faces=oriented(mesh.vertices,mesh.faces);
+ const edgeMap=new Map();mesh.faces.forEach((f,fi)=>f.forEach((v,i)=>{const w=f[(i+1)%f.length],key=[v,w].sort((a,b)=>a-b).join(':');if(!edgeMap.has(key))edgeMap.set(key,{a:v,b:w,faces:[]});edgeMap.get(key).faces.push(fi);}));
+ const features=new Set();for(const ring of featureRings)ring.forEach((v,i)=>features.add([v,ring[(i+1)%ring.length]].sort((a,b)=>a-b).join(':')));
+ const edges=[...edgeMap.entries()].map(([key,e])=>({...e,feature:!curved||features.has(key)}));
+ const n=(['cube','cuboid','oblique-prism','square-frustum'].includes(id)?4:id==='triangular-prism'?3:id==='hexagonal-prism'?6:0);const vertexLabels=mesh.vertices.map((_,i)=>n&&i>=n?'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[i-n]+"'":'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[i]??'');if(['tetrahedron','square-pyramid'].includes(id)||(id==='square-frustum'&&p.b===0))vertexLabels[vertexLabels.length-1]='S';
+ return {schema:'math-solid/1.0',id,name:spec.name,classification,parameters:p,vertices:mesh.vertices,vertexLabels,faces:mesh.faces,edges,curved,segments:curved?seg:null,metrics:{volume,area,lateralArea},note:spec.note,approximation:curved?'曲面网格仅用于可视化，圆周采用 '+seg+' 段；测度按解析公式计算。':'顶点、棱、面采用解析坐标，浮点存储。'};
+}
+
+
+const defaultView={yaw:-.62,pitch:.43,zoom:1};
+const defaultLesson={faces:true,hidden:true,labels:true,axis:true};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
+function renderSolidSVG(model,view={},lesson={},options={}){
+ const {yaw,pitch,zoom}={...defaultView,...view},state={...defaultLesson,...lesson};
+ if(![yaw,pitch,zoom].every(Number.isFinite)||zoom<=0)throw new RangeError('视角与缩放必须为有限数，缩放为正');
+ const w=options.width??700,h=options.height??520;
+ if(![w,h].every(Number.isFinite)||w<=0||h<=0)throw new RangeError('画布尺寸必须为正数');
+ const cy=Math.cos(yaw),sy=Math.sin(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch);
+ const right=[cy,sy,0],up=[-sy*sp,cy*sp,cp],camera=[sy*cp,-cy*cp,sp];
+ const vs=model.vertices,lo=[0,1,2].map(i=>Math.min(...vs.map(v=>v[i]))),hi=[0,1,2].map(i=>Math.max(...vs.map(v=>v[i]))),center=lo.map((v,i)=>(v+hi[i])/2);
+ const coords=vs.map(v=>{const q=sub(v,center);return [dot(q,right),-dot(q,up),dot(q,camera)];});
+ // Circumscribed bounding-sphere fit is invariant under camera changes.
+ const radius=Math.max(...vs.map(v=>length(sub(v,center))));
+ const scale=Math.min(w,h)*.37*zoom/radius;
+ const project=q=>[w/2+q[0]*scale,h/2+q[1]*scale];
+ const point=i=>project(coords[i]).map(v=>v.toFixed(3)).join(',');
+ const normals=model.faces.map(f=>{const n=cross(sub(vs[f[1]],vs[f[0]]),sub(vs[f[2]],vs[f[0]]));return n.map(v=>v/length(n));});
+ const visibility=normals.map(n=>dot(n,camera)>1e-10);
+ const faces=model.faces.map((f,i)=>({f,i,depth:f.reduce((s,k)=>s+coords[k][2],0)/f.length})).filter(o=>visibility[o.i]).sort((a,b)=>a.depth-b.depth);
+ const light=[-.35,-.6,.72],surface=faces.map(({f,i})=>{const intensity=Math.max(0,dot(normals[i],light)),lum=76+intensity*12;return `<polygon points="${f.map(point).join(' ')}" fill="hsl(154 24% ${lum.toFixed(1)}%)" stroke="hsl(154 24% ${lum.toFixed(1)}%)" stroke-width=".5" stroke-linejoin="round"/>`;}).join('');
+ const paths=segments=>{const unused=new Set(segments.map((_,i)=>i)),adj=new Map();segments.forEach(([a,b],i)=>{for(const v of [a,b]){if(!adj.has(v))adj.set(v,[]);adj.get(v).push(i);}});let result='';while(unused.size){const first=unused.values().next().value;let vertex=segments[first][0];const endpoint=[...adj.keys()].find(v=>adj.get(v).filter(i=>unused.has(i)).length===1);if(endpoint!==undefined)vertex=endpoint;result+='M'+point(vertex);while(true){const index=adj.get(vertex).find(i=>unused.has(i));if(index===undefined)break;unused.delete(index);const [a,b]=segments[index];vertex=a===vertex?b:a;result+='L'+point(vertex);}}return result;};
+ const solid=[],hidden=[],aux=[];
+ for(const e of model.edges){const front=e.faces.some(i=>visibility[i]),silhouette=e.faces.length===2&&visibility[e.faces[0]]!==visibility[e.faces[1]];
+ if(!(e.feature||silhouette))continue;
+ const d=[e.a,e.b];
+ if(model.id==='sphere'&&e.feature&&!silhouette){if(front||state.hidden)aux.push(d);}else if(front)solid.push(d);else if(state.hidden&&e.feature)hidden.push(d);
+ }
+ let labels='';
+ if(state.labels&&!model.curved){const chars='ABCDEFGHIJKLMNOPQRSTUVWXYZ';labels=vs.map((_,i)=>{const [x,y]=project(coords[i]),vx=x-w/2,vy=y-h/2,dr=Math.hypot(vx,vy)||1;const label=options.vertexLabels?.[i]??model.vertexLabels?.[i]??chars[i];return `<text x="${(x+vx/dr*15).toFixed(2)}" y="${(y+vy/dr*15+4).toFixed(2)}" text-anchor="middle" font-size="14" font-family="Georgia,serif" fill="#234e40" paint-order="stroke" stroke="white" stroke-width="3">${esc(label)}</text>`;}).join('');}
+ let axis='';if(state.axis){const ps=[[0,0,lo[2]],[0,0,hi[2]]].map(v=>{const q=sub(v,center);return project([dot(q,right),-dot(q,up)]).map(x=>x.toFixed(3)).join(',');});axis=`<path d="M${ps[0]}L${ps[1]}" stroke="#ae643b" stroke-width="1.5" stroke-dasharray="7 5"/><circle cx="${ps[0].split(',')[0]}" cy="${ps[0].split(',')[1]}" r="3" fill="#ae643b"/>`;}
+ return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" role="img" aria-label="${esc(model.name)}的正交投影"><title>${esc(model.name)} · 正交投影</title><desc>模型坐标中的尺寸是真实量，投影长度和角度不代表空间真实量。${esc(model.approximation)}</desc><g>${state.faces?surface:''}</g><g fill="none" stroke="#789389" stroke-width="1.25" stroke-dasharray="5 5" stroke-linecap="round"><path d="${paths(hidden)}"/><path d="${paths(aux)}"/></g><path d="${paths(solid)}" fill="none" stroke="#285443" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>${axis}${labels}</svg>`;
+}
+
+// Native MathML: formulas remain selectable and require no CDN or font package.
+const mi=x=>`<mi>${x}</mi>`,mn=x=>`<mn>${x}</mn>`,mo=x=>`<mo>${x}</mo>`,row=(...x)=>`<mrow>${x.join('')}</mrow>`,pow=(x,n)=>`<msup>${x}${mn(n)}</msup>`,frac=(a,b)=>`<mfrac>${a}${b}</mfrac>`,root=x=>`<msqrt>${x}</msqrt>`,br=x=>row(mo('('),x,mo(')'));
+const a=mi('a'),b=mi('b'),c=mi('c'),h=mi('h'),R=mi('R'),r=mi('r'),pi=mi('π'),plus=mo('+'),minus=mo('−'),two=mn(2),three=mn(3),sq=x=>pow(x,2),cube=x=>pow(x,3);
+const f=(symbol,rhs)=>`<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">${row(mi(symbol),mo('='),rhs)}</math>`;
+function formulas(id){let v,s,l;
+ switch(id){
+ case 'cube':v=cube(a);s=row(mn(6),sq(a));break;
+ case 'cuboid':v=row(a,b,c);s=row(two,br(row(a,b,plus,b,c,plus,c,a)));break;
+ case 'triangular-prism':v=row(frac(root(three),mn(4)),sq(a),h);s=row(three,a,h,plus,frac(root(three),two),sq(a));break;
+ case 'hexagonal-prism':v=row(frac(row(three,root(three)),two),sq(a),h);s=row(mn(6),a,h,plus,three,root(three),sq(a));break;
+ case 'oblique-prism':v=row(a,b,h);s=row(two,a,b,plus,two,a,root(row(sq(h),plus,sq(mi('dy')))),plus,two,b,root(row(sq(h),plus,sq(mi('dx')))));break;
+ case 'tetrahedron':v=frac(cube(a),row(mn(6),root(two)));s=row(root(three),sq(a));break;
+ case 'square-pyramid':v=frac(row(sq(a),h),three);s=row(sq(a),plus,two,a,root(row(sq(h),plus,frac(sq(a),mn(4)))));break;
+ case 'square-frustum':v=row(frac(h,three),br(row(sq(a),plus,a,b,plus,sq(b))));s=row(sq(a),plus,sq(b),plus,two,br(row(a,plus,b)),root(row(sq(h),plus,frac(sq(br(row(a,minus,b))),mn(4)))));break;
+ case 'cylinder':v=row(pi,sq(R),h);s=row(two,pi,R,br(row(R,plus,h)));break;
+ case 'cone':v=frac(row(pi,sq(R),h),three);s=row(pi,sq(R),plus,pi,R,root(row(sq(R),plus,sq(h))));break;
+ case 'cone-frustum':v=row(frac(row(pi,h),three),br(row(sq(R),plus,R,r,plus,sq(r))));s=row(pi,br(row(sq(R),plus,sq(r))),plus,pi,br(row(R,plus,r)),root(row(sq(h),plus,sq(br(row(R,minus,r))))));break;
+ case 'sphere':v=row(frac(mn(4),three),pi,cube(R));s=row(mn(4),pi,sq(R));break;
+ case 'hemisphere':v=row(frac(two,three),pi,cube(R));s=row(three,pi,sq(R));l=row(two,pi,sq(R));break;
+ case 'octahedron':v=row(frac(root(two),three),cube(a));s=row(two,root(three),sq(a));break;
+ }
+ return [{title:'体积',math:f('V',v)},{title:id==='hemisphere'?'总表面积（含底面）':'总表面积',math:f('S',s)},...(l?[{title:'曲面面积（不含底面）',math:f('A',l)}]:[])];
+}
+
+
+
+
+const $=id=>document.getElementById(id),clone=o=>JSON.parse(JSON.stringify(o));
+const format=n=>Number(n.toPrecision(6)).toLocaleString('en-US',{maximumFractionDigits:6,useGrouping:false});
+function download(name,data,type){const blob=new Blob([data],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);}
+function mountSolid(element,{solidId='cube',mathState={},viewState={},lessonState={}}={}){
+ if(Object.keys(lessonState).some(k=>!Object.hasOwn(defaultLesson,k)||typeof lessonState[k]!=='boolean'))throw new TypeError('讲解状态必须为已知布尔项');
+ let alive=true,model=createSolid(solidId,mathState),view={...defaultView,...viewState},lesson={...defaultLesson,...lessonState};
+ const draw=()=>{if(!alive)throw new Error('组件已销毁');element.innerHTML=renderSolidSVG(model,view,lesson);};
+ draw();return {getState:()=>clone({math:{solidId:model.id,...model.parameters},view,lesson}),getModel:()=>clone(model),setMath(next){const target=next.solidId??model.id,{solidId:_,...params}=next;const value=createSolid(target,target===model.id?{...model.parameters,...params}:params);model=value;draw();},setView(next){const value={...view,...next};renderSolidSVG(model,value,lesson);view=value;draw();},setLesson(next){if(Object.keys(next).some(k=>!Object.hasOwn(defaultLesson,k)||typeof next[k]!=='boolean'))throw new TypeError('讲解状态必须为已知布尔项');lesson={...lesson,...next};draw();},reset(){model=createSolid(solidId,mathState);view={...defaultView,...viewState};lesson={...defaultLesson,...lessonState};draw();},destroy(){if(!alive)return;alive=false;element.replaceChildren();}};
+}
+function startGallery(){
+ if(!$('stage'))return;
+ let id=window.SOLIDS_INITIAL??'cube',math=defaults(id),view={...defaultView},lesson={...defaultLesson},model=createSolid(id),activeGroup='全部';
+ const state=()=>({math:{solidId:id,a:2,b:2,c:2,h:3,R:2,r:1,dx:1,dy:.4,...math},view:clone(view),lesson:clone(lesson)});
+ const status=(text,bad=false)=>{$('status').textContent=text;$('status').dataset.error=String(bad);};
+ function update(){model=createSolid(id,math);$('stage').innerHTML=renderSolidSVG(model,view,lesson);$('solid-name').textContent=model.name;$('solid-code').textContent=id+' / 1.0.0';$('note').textContent=model.note;$('classification').textContent=model.classification;$('volume').textContent=format(model.metrics.volume);$('area').textContent=format(model.metrics.area);$('approximation').textContent=model.approximation;$('formula').innerHTML=formulas(id).map(o=>`<section><h3>${o.title}</h3><div class="math-scroll">${o.math}</div></section>`).join('');
+ for(const k of Object.keys(defaultLesson))$(k).checked=lesson[k];$('yaw').value=view.yaw;$('pitch').value=view.pitch;$('zoom').value=view.zoom;
+ $('yaw-value').textContent=Math.round(view.yaw*180/Math.PI)+'°';$('pitch-value').textContent=Math.round(view.pitch*180/Math.PI)+'°';$('zoom-value').textContent=view.zoom.toFixed(2)+'×';
+ document.querySelectorAll('[data-solid]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.solid===id)));
+ }
+ function params(){const spec=getSpec(id);$('parameters').replaceChildren();for(const [key,p] of Object.entries(spec.params)){const container=document.createElement('label');container.className='parameter';container.innerHTML=`<span>${p.label} <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>${p.symbol}</mi></math></span><input type="number" step="${p.step}" min="${p.min}" max="${p.max}" value="${math[key]}" aria-label="${p.label}数值"><input type="range" step="${p.step}" min="${p.min}" max="${p.max}" value="${math[key]}" aria-label="${p.label}滑块">`;
+ const [number,slider]=container.querySelectorAll('input');number.min=slider.min=Math.min(p.min,math[key]);number.max=slider.max=Math.max(p.max,math[key]);number.step=slider.step='any';const change=source=>{const value=Number(source.value);if(source.value===''||!Number.isFinite(value)||value<Number(number.min)||value>Number(number.max)){status('参数尚未生效：'+p.label+'的界面演示范围为 '+p.min+' 至 '+p.max+'。图中保留上次有效模型。',true);return;}const next={...math,[key]:value};try{createSolid(id,next);}catch(error){status('参数尚未生效：'+error.message+'；图中保留上次有效模型。',true);return;}math=next;number.value=slider.value=value;update();status('参数已更新。体积、面积与模型同步。');};number.addEventListener('input',()=>change(number));slider.addEventListener('input',()=>change(slider));$('parameters').append(container);}}
+ function loadScene(scene){getSpec(scene);id=scene;math=defaults(id);view={...defaultView};lesson={...defaultLesson};params();update();status('已载入默认资产。拖动图形可旋转视角。');}
+ function restoreHash(){const hash=new URLSearchParams(location.hash.slice(1)),scene=hash.get('scene'),raw=hash.get('state');try{if(raw){const next=JSON.parse(raw);if(!next||!next.math||!next.view||!next.lesson)throw new TypeError('缺少状态分组');const {solidId,...all}=next.math;getSpec(solidId);if(Object.keys(all).some(k=>!['a','b','c','h','R','r','dx','dy'].includes(k)||!Number.isFinite(all[k])))throw new TypeError('无效数学状态');if(Object.keys(next.view).some(k=>!(k in defaultView)||!Number.isFinite(next.view[k])))throw new TypeError('无效视角状态');if(Object.keys(next.lesson).some(k=>!Object.hasOwn(defaultLesson,k)||typeof next.lesson[k]!=='boolean'))throw new TypeError('无效讲解状态');const parameters=Object.fromEntries(Object.keys(getSpec(solidId).params).map(k=>[k,all[k]??defaults(solidId)[k]]));createSolid(solidId,parameters);if(next.view.yaw < -Math.PI||next.view.yaw>Math.PI||next.view.pitch < -1.35||next.view.pitch>1.35||next.view.zoom < .5||next.view.zoom>1.5)throw new RangeError('视角状态越界');renderSolidSVG(createSolid(solidId,parameters),next.view,next.lesson);id=solidId;math=parameters;view={...defaultView,...next.view};lesson={...defaultLesson,...next.lesson};params();update();status('已恢复链接中的数学、视角和讲解状态。');}else if(scene)loadScene(scene);else loadScene(window.SOLIDS_INITIAL??'cube');}catch(error){loadScene(window.SOLIDS_INITIAL??'cube');status('链接状态不可用：'+error.message+'；已恢复默认资产。',true);}}
+ function catalogHTML(){const grid=$('catalog');grid.innerHTML='';for(const item of catalog){if(activeGroup!=='全部'&&item.group!==activeGroup)continue;const card=document.createElement('button');card.className='asset-card';card.dataset.solid=item.id;card.setAttribute('aria-label','选择'+item.name);card.setAttribute('aria-pressed',String(item.id===id));card.innerHTML=renderSolidSVG(createSolid(item.id),defaultView,{...defaultLesson,hidden:false},{width:240,height:165})+`<span>${item.name}</span><small>${item.id}</small>`;card.addEventListener('click',()=>{location.hash='scene='+item.id;});grid.append(card);}}
+ document.querySelectorAll('[data-group]').forEach(el=>el.addEventListener('click',()=>{activeGroup=el.dataset.group;document.querySelectorAll('[data-group]').forEach(b=>b.setAttribute('aria-pressed',String(b===el)));catalogHTML();}));
+ for(const key of ['yaw','pitch','zoom'])$(key).addEventListener('input',()=>{view={...view,[key]:Number($(key).value)};update();status('仅调整视角，数学参数和测度不变。');});
+ for(const key of Object.keys(defaultLesson))$(key).addEventListener('change',()=>{lesson={...lesson,[key]:$(key).checked};update();status('仅调整显示，数学参数不变。');});
+ $('reset').addEventListener('click',()=>loadScene(id));
+ $('front').addEventListener('click',()=>{view={yaw:0,pitch:0,zoom:1};update();status('正视图：视线沿负 y 轴，长度按等比例正交投影。');});
+ $('default-view').addEventListener('click',()=>{view={...defaultView};update();status('已恢复默认视角。');});
+ $('svg-export').addEventListener('click',()=>download(id+'.svg',renderSolidSVG(model,view,lesson),'image/svg+xml'));
+ $('json-export').addEventListener('click',()=>download(id+'.json',JSON.stringify({...model,state:state()},null,2),'application/json'));
+ $('state-export').addEventListener('click',()=>download(id+'-state.json',JSON.stringify(state(),null,2),'application/json'));
+ $('link').addEventListener('click',()=>{const hash=new URLSearchParams({scene:id,state:JSON.stringify(state())});location.hash=hash.toString();$('link-value').value=location.href;$('link-box').hidden=false;status('状态链接已生成。请复制；跨设备需同时传送作品包，file 链接不能直接分享。');});
+ let drag=null;const stage=$('stage');stage.addEventListener('pointerdown',event=>{if(event.button!==0)return;drag={x:event.clientX,y:event.clientY,yaw:view.yaw,pitch:view.pitch};stage.setPointerCapture(event.pointerId);});stage.addEventListener('pointermove',event=>{if(!drag)return;view={...view,yaw:Math.max(-Math.PI,Math.min(Math.PI,drag.yaw+(event.clientX-drag.x)*.01)),pitch:Math.max(-1.35,Math.min(1.35,drag.pitch+(event.clientY-drag.y)*.01))};update();});const release=()=>{drag=null;};stage.addEventListener('pointerup',release);stage.addEventListener('pointercancel',release);
+ stage.addEventListener('keydown',event=>{const map={ArrowLeft:['yaw',-.08],ArrowRight:['yaw',.08],ArrowUp:['pitch',.08],ArrowDown:['pitch',-.08]};if(!map[event.key])return;event.preventDefault();const [k,d]=map[event.key];view={...view,[k]:Math.max(k==='pitch'?-1.35:-Math.PI,Math.min(k==='pitch'?1.35:Math.PI,view[k]+d))};update();});
+ window.addEventListener('hashchange',restoreHash);catalogHTML();restoreHash();
+ // Explicit read API for reuse / verification, not a synthetic proof or validation flag.
+ window.solidsGallery={getState:()=>clone(state()),getModel:()=>clone(model),list:()=>catalog.map(s=>s.id)};
+}
+const baseRenderSolidSVG = renderSolidSVG;
+let construction = 'none';
+let sectionHeight = 0.5;
+const constructionModels = {projection:'cube',midpoints:'cube',section:'cube','tetra-line':'tetrahedron','tetra-dihedral':'tetrahedron','pyramid-line':'square-pyramid','pyramid-dihedral':'square-pyramid'};
+renderSolidSVG = function(model, view, lesson, options = {}) {
+  const original = baseRenderSolidSVG(model, view, lesson, options);
+  if (model.id !== constructionModels[construction] || (options.width && options.width !== 700)) return original;
+  const width = options.width ?? 700, height = options.height ?? 520;
+  const {yaw, pitch, zoom} = {...defaultView, ...view};
+  const vertices = model.vertices;
+  const low = [0,1,2].map(index => Math.min(...vertices.map(vertex => vertex[index])));
+  const high = [0,1,2].map(index => Math.max(...vertices.map(vertex => vertex[index])));
+  const center = low.map((value,index) => (value + high[index]) / 2);
+  const radius = Math.max(...vertices.map(vertex => length(sub(vertex,center))));
+  const scale = Math.min(width,height)*.37*zoom/radius;
+  const right = [Math.cos(yaw), Math.sin(yaw), 0];
+  const up = [-Math.sin(yaw)*Math.sin(pitch), Math.cos(yaw)*Math.sin(pitch), Math.cos(pitch)];
+  const point = vertex => { const delta = sub(vertex,center); return [width/2+dot(delta,right)*scale,height/2-dot(delta,up)*scale]; };
+  const pair = vertex => point(vertex).map(value => value.toFixed(2)).join(',');
+  const midpoint = (first,second) => first.map((value,index) => (value+second[index])/2);
+  const line = (first,second,dashed = false) => `<path d="M${pair(first)} L${pair(second)}" fill="none" stroke="#c2502f" stroke-width="3" ${dashed?'stroke-dasharray="7 5"':''}/>`;
+  const label = (vertex,text) => { const [x,y]=point(vertex); return `<circle cx="${x}" cy="${y}" r="4" fill="#c2502f"/><text x="${x+8}" y="${y-8}" fill="#a83d20" font-size="18" font-family="Georgia,serif" paint-order="stroke" stroke="white" stroke-width="4">${text}</text>`; };
+  const arc = (first,vertex,last) => {
+    const firstVector=sub(first,vertex),lastVector=sub(last,vertex);
+    const unitFirst=firstVector.map(value=>value/length(firstVector)),unitLast=lastVector.map(value=>value/length(lastVector));
+    const angle=Math.acos(Math.max(-1,Math.min(1,dot(unitFirst,unitLast))));
+    const distance=Math.min(length(firstVector),length(lastVector))*.22;
+    const points=Array.from({length:17},(_,index)=>{const t=angle*index/16;return vertex.map((value,axis)=>value+distance*(unitFirst[axis]*Math.sin(angle-t)+unitLast[axis]*Math.sin(t))/Math.sin(angle));});
+    return `<path d="M${points.map(pair).join(' L')}" fill="none" stroke="#c2502f" stroke-width="2.4"/>`;
+  };
+  let overlay = '';
+  if (construction === 'projection') {
+    overlay = line(vertices[0],vertices[6])+line(vertices[0],vertices[2],true)+line(vertices[2],vertices[6],true);
+  } else if (construction === 'midpoints') {
+    const first=midpoint(vertices[0],vertices[1]),second=midpoint(vertices[0],vertices[3]);
+    overlay = line(first,second)+line(vertices[1],vertices[3],true)+label(first,'M')+label(second,'N');
+  } else if (construction === 'section') {
+    const section=vertices.slice(0,4).map((vertex,index)=>vertex.map((value,axis)=>value+(vertices[index+4][axis]-value)*sectionHeight));
+    overlay = `<polygon points="${section.map(pair).join(' ')}" fill="#e9a35c" fill-opacity=".38" stroke="#bf572d" stroke-width="3"/>`;
+  } else {
+    const isTetra=model.id==='tetrahedron';
+    const apex=vertices[isTetra?3:4],base=vertices[0],center=mean(vertices.slice(0,isTetra?3:4));
+    const middle=midpoint(vertices[0],vertices[1]);
+    if (construction.endsWith('line')) {
+      overlay=line(apex,base)+line(apex,center,true)+line(base,center,true)+arc(apex,base,center)+label(center,'O');
+    } else {
+      overlay=line(apex,middle)+line(center,middle,true)+line(apex,center,true)+arc(apex,middle,center)+label(center,'O')+label(middle,'M');
+    }
+  }
+  return original.replace('</svg>', `<g aria-label="题型辅助构造">${overlay}</g></svg>`);
+};
+function installConstructions(){
+  const controls=document.createElement('section');
+  controls.className='construction-controls';
+  controls.innerHTML=`<h3>题型辅助构造</h3><label for="construction">选择构造</label><select id="construction"><option value="none">基础几何体</option><optgroup label="正方体"><option value="projection">体对角线与底面射影</option><option value="midpoints">三角形中位线</option><option value="section">平行底面的截面</option></optgroup><optgroup label="正四面体"><option value="tetra-line">侧棱与底面所成的角</option><option value="tetra-dihedral">侧面与底面的二面角</option></optgroup><optgroup label="正四棱锥"><option value="pyramid-line">侧棱与底面所成的角</option><option value="pyramid-dihedral">侧面与底面的二面角</option></optgroup></select><label id="height-label" hidden>截面高度 <input id="section-height" type="range" min="0" max="1" step="0.01" value="0.5"><output id="section-value">50%</output></label><p id="construction-note">可切换其他几何体，调整视角并导出当前 SVG。</p>`;
+  document.querySelector('.controls').prepend(controls);
+  controls.after(document.querySelector('#asset-picker'));
+  const select=controls.querySelector('select'),slider=controls.querySelector('input');
+  const notes={none:'可切换其他几何体，调整视角并导出当前 SVG。',projection:'红实线为 AC′，虚线为射影 AC 与垂线 CC′；用于观察线面角。',midpoints:'M、N 分别为 AB、AD 的中点，MN ∥ BD；用于观察中位线。',section:'截面与底面平行；滑块的 0% 与 100% 分别对应下底面和上底面。','tetra-line':'O 为正三角形 ABC 的中心，SO 垂直底面；∠SAO 是侧棱 SA 与底面所成的角。','pyramid-line':'O 为正方形 ABCD 的中心，SO 垂直底面；∠SAO 是侧棱 SA 与底面所成的角。','tetra-dihedral':'M 为 AB 中点，O 为底面中心；SM、OM 均垂直 AB，∠SMO 是侧面 SAB 与底面的二面角的平面角。','pyramid-dihedral':'M 为 AB 中点，O 为底面中心；SM、OM 均垂直 AB，∠SMO 是侧面 SAB 与底面的二面角的平面角。'};
+  function refresh(){document.querySelector('#yaw').dispatchEvent(new Event('input'));}
+  select.addEventListener('change',()=>{
+    construction=select.value;
+    if(construction !== 'none' && window.solidsGallery.getState().math.solidId !== constructionModels[construction]) location.hash='scene='+constructionModels[construction];
+    controls.querySelector('#height-label').hidden=construction!=='section';
+    controls.querySelector('#construction-note').textContent=notes[construction];
+    const labels=document.querySelector('#labels');
+    if(construction!=='none' && !labels.checked) labels.click();
+    refresh();
+  });
+  slider.addEventListener('input',()=>{sectionHeight=Number(slider.value);controls.querySelector('output').textContent=Math.round(sectionHeight*100)+'%';refresh();});
+  window.addEventListener('hashchange',()=>{if(construction!=='none' && window.solidsGallery.getState().math.solidId!==constructionModels[construction]){construction='none';select.value='none';controls.querySelector('#height-label').hidden=true;controls.querySelector('#construction-note').textContent=notes.none;}else if(construction!=='none'){const labels=document.querySelector('#labels');if(!labels.checked)labels.click();refresh();}});
+}
+
+if(typeof document!=='undefined'){startGallery();installConstructions();}
+</script></body></html>
