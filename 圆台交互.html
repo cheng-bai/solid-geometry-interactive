@@ -1,0 +1,117 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>圆台的体积与表面积</title><meta name="author" content="chengbai"><style>
+:root{color-scheme:light;--ink:#203c3d;--accent:#176b66;--warm:#b56b37;--paper:#f5f4ee}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Songti SC,STSong,serif;line-height:1.65}main{max-width:1440px;margin:auto;padding:30px 36px 64px}header{display:flex;align-items:end;justify-content:space-between;border-bottom:1px solid #cbd5cf;padding-bottom:18px;gap:20px}h1{font-size:clamp(30px,4vw,48px);margin:0;line-height:1.2;font-weight:600}header p{margin:0;color:#5c7370}h2{font-size:21px;margin:0 0 12px}h3{margin:0 0 8px;font-size:18px}.workspace{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(290px,.7fr);gap:22px;margin-top:24px}.card{background:#fff;border:1px solid #d9e1db;border-radius:12px;padding:20px}.figure{position:relative;background:#eef4f0;min-height:365px;border-radius:8px;overflow:hidden;touch-action:none;cursor:grab}.figure:active{cursor:grabbing}.figure svg{display:block;width:100%;height:365px}.hint{position:absolute;bottom:8px;left:14px;color:#607a76;font-size:14px}.controls{display:grid;gap:15px}.control-head{display:flex;justify-content:space-between;gap:8px}.control-head strong{font-weight:600}.control-head output{font-family:system-ui;font-size:15px}input[type=range]{width:100%;accent-color:var(--accent)}button{font:inherit;background:white;border:1px solid #adc2b8;color:var(--ink);border-radius:6px;padding:6px 12px;cursor:pointer}button:hover,button:focus-visible{border-color:var(--accent);background:#eaf5ef}.buttons{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.note{color:#5c7370;font-size:14px;margin:8px 0 0}.readouts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#dbe4dc;border:1px solid #dbe4dc;border-radius:8px;overflow:hidden;margin-top:16px}.readouts div{background:#f6faf7;padding:12px}.readouts span{display:block;font-size:14px;color:#5b746f}.readouts strong{font-family:system-ui;font-size:clamp(17px,2vw,23px)}.details{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}.net{width:100%;height:250px;background:#faf8f1;border-radius:8px}.formula{font-size:1.14em;margin:12px 0;overflow-x:auto}math{white-space:nowrap}p{text-align:justify}details{border-top:1px solid #d9e1db;margin-top:14px;padding-top:12px}summary{cursor:pointer;color:var(--accent);font-weight:bold}.tag{font-size:14px;color:var(--warm)}@media(max-width:760px){main{padding:22px 16px 48px}header{display:block}header p{margin-top:8px}.workspace,.details{grid-template-columns:1fr}.figure,.figure svg{min-height:300px;height:300px}.readouts div{padding:8px}.readouts strong{font-size:16px}}
+</style></head><body><main><header><div><div class="tag">空间几何 · 旋转体</div><h1>圆台的体积与表面积</h1></div><p>改变半径与高，观察立体、展开图和测度如何联动。</p></header>
+<section class="workspace"><div class="card"><h2>观察圆台 <small id="kind" class="tag"></small></h2><div class="figure" id="figure" tabindex="0" aria-label="圆台三维视图，可拖动或用方向键旋转"><div class="hint">拖动或使用方向键旋转视角</div></div><div class="readouts"><div><span>母线长 l</span><strong id="slant"></strong></div><div><span>体积 V</span><strong id="volume"></strong></div><div><span>总表面积 S</span><strong id="area"></strong></div></div><p class="note">数值保留两位小数；长度采用统一单位。图形为正交投影，圆周由 64 段近似。</p></div>
+<div class="card"><h2>调整尺寸</h2><div class="controls"><label><div class="control-head"><strong>下底半径 R</strong><output id="Rvalue"></output></div><input id="R" type="range" min="1" max="4" step="0.1" value="3"></label><label><div class="control-head"><strong>上底半径 r</strong><output id="rvalue"></output></div><input id="r" type="range" min="0" max="3" step="0.1" value="1.5"></label><label><div class="control-head"><strong>高 h</strong><output id="hvalue"></output></div><input id="h" type="range" min="1" max="5" step="0.1" value="3"></label></div><p class="note">演示范围：1 ≤ R ≤ 4，0 ≤ r ≤ R，1 ≤ h ≤ 5。调整 R 时若 r 超出范围，将自动收至 R。</p><div class="buttons"><button id="cone">圆锥边界</button><button id="cylinder">圆柱边界</button><button id="reset">重置</button></div><details open><summary>观察什么？</summary><p>固定下底和高，增大上底半径：体积怎样变化？当上底半径趋近下底半径时，侧面展开图会趋近什么形状？</p></details></div></section>
+<section class="details"><div class="card"><h2>侧面展开</h2><svg id="net" class="net" viewBox="0 0 480 250" role="img" aria-label="圆台侧面展开示意图"></svg><p id="netnote" class="note"></p><div class="formula"><math><msub><mi>S</mi><mtext>侧</mtext></msub><mo>=</mo><mi>π</mi><mo>(</mo><mi>R</mi><mo>+</mo><mi>r</mi><mo>)</mo><mi>l</mi></math></div><p>圆台侧面展开为扇环：两条弧长分别等于下、上底周长。扇环面积等于两条弧长的平均数乘母线长。</p></div><div class="card"><h2>从尺寸到测度</h2><div class="formula"><math><mi>l</mi><mo>=</mo><msqrt><msup><mi>h</mi><mn>2</mn></msup><mo>+</mo><msup><mrow><mo>(</mo><mi>R</mi><mo>−</mo><mi>r</mi><mo>)</mo></mrow><mn>2</mn></msup></msqrt></math></div><div class="formula"><math><mi>V</mi><mo>=</mo><mfrac><mrow><mi>π</mi><mi>h</mi></mrow><mn>3</mn></mfrac><mo>(</mo><msup><mi>R</mi><mn>2</mn></msup><mo>+</mo><mi>R</mi><mi>r</mi><mo>+</mo><msup><mi>r</mi><mn>2</mn></msup><mo>)</mo></math></div><div class="formula"><math><mi>S</mi><mo>=</mo><mi>π</mi><mo>(</mo><msup><mi>R</mi><mn>2</mn></msup><mo>+</mo><msup><mi>r</mi><mn>2</mn></msup><mo>)</mo><mo>+</mo><mi>π</mi><mo>(</mo><mi>R</mi><mo>+</mo><mi>r</mi><mo>)</mo><mi>l</mi></math></div><details><summary>为什么体积是这个式子？</summary><p>将圆台向上补成圆锥。大、小圆锥相似，高之比等于底面半径之比；用大圆锥体积减去小圆锥体积并化简，得到上式。上、下底半径相等时，可直接代入得到圆柱体积。</p></details><p class="note">总表面积包含上、下两个底面；圆锥边界的上底面积为零。</p></div></section></main><script>// Analytic solid models; no renderer or browser dependency. Length units are arbitrary but consistent.
+const sqrt=Math.sqrt, PI=Math.PI;
+const param=(label,symbol,value,min=.25,max=6)=>({label,symbol,default:value,min,max,step:.05});
+const catalog=[
+ {id:'cube',name:'正方体',group:'棱柱',params:{a:param('棱长','a',2)},note:'六个面都是正方形；相邻棱互相垂直。'},
+ {id:'cuboid',name:'长方体',group:'棱柱',params:{a:param('长','a',3),b:param('宽','b',2),c:param('高','c',2.5)},note:'三个相邻棱长可以独立改变。'},
+ {id:'triangular-prism',name:'直三棱柱（正三角形底）',group:'棱柱',params:{a:param('底边长','a',2.4),h:param('高','h',3)},note:'本资产的底面限定为正三角形，侧棱垂直于底面。'},
+ {id:'hexagonal-prism',name:'正六棱柱',group:'棱柱',params:{a:param('底边长','a',1.5),h:param('高','h',2.5)},note:'底面为正六边形，侧棱垂直于底面。'},
+ {id:'oblique-prism',name:'斜四棱柱（矩形底）',group:'棱柱',params:{a:param('底面长','a',3),b:param('底面宽','b',2),h:param('垂直高','h',2.5),dx:param('上底横向平移','dx',1,-3,3),dy:param('上底纵向平移','dy',.4,-3,3)},note:'侧棱长通常不等于高；平移为零时成为直棱柱。'},
+ {id:'tetrahedron',name:'正四面体',group:'棱锥与棱台',params:{a:param('棱长','a',3)},note:'四个面都是正三角形，六条棱等长；高度由棱长确定。'},
+ {id:'square-pyramid',name:'正四棱锥',group:'棱锥与棱台',params:{a:param('底边长','a',3),h:param('高','h',3)},note:'底面为正方形，顶点在底面中心的垂线上；斜高与侧棱不同。'},
+ {id:'square-frustum',name:'正四棱台',group:'棱锥与棱台',params:{a:param('下底边长','a',3.5),b:param('上底边长','b',1.8,0,6),h:param('高','h',2.5)},note:'上下底对应边平行且同心；上底边为零时是棱锥极限，相等时是棱柱极限。'},
+ {id:'cylinder',name:'圆柱',group:'旋转体',params:{R:param('半径','R',1.5),h:param('高','h',3)},note:'本资产为直圆柱；底面积与高共同确定体积。'},
+ {id:'cone',name:'圆锥',group:'旋转体',params:{R:param('底面半径','R',1.8),h:param('高','h',3)},note:'本资产为直圆锥；母线长由半径和高确定。'},
+ {id:'cone-frustum',name:'圆台',group:'旋转体',params:{R:param('下底半径','R',2),r:param('上底半径','r',1,0,6),h:param('高','h',2.5)},note:'上下底同轴；上底半径为零时是圆锥极限，相等时是圆柱极限。'},
+ {id:'sphere',name:'球',group:'旋转体',params:{R:param('半径','R',2)},note:'体积和表面积按解析公式计算；绘制时用曲面分段近似。'},
+ {id:'hemisphere',name:'半球',group:'旋转体',params:{R:param('半径','R',2)},note:'总表面积包含底面圆盘，曲面面积另列。'},
+ {id:'octahedron',name:'正八面体',group:'正多面体',params:{a:param('棱长','a',2.5)},note:'八个面都是正三角形；六个顶点，十二条棱。'},
+];
+const defaults=id=>Object.fromEntries(getSpec(id).params?Object.entries(getSpec(id).params).map(([k,p])=>[k,p.default]):[]);
+function getSpec(id){const s=catalog.find(s=>s.id===id);if(!s)throw new RangeError('未知几何体：'+id);return s;}
+const sub=(a,b)=>a.map((v,i)=>v-b[i]);
+const dot=(a,b)=>a.reduce((s,v,i)=>s+v*b[i],0);
+const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+const length=v=>Math.hypot(...v);
+const mean=vs=>vs[0].map((_,i)=>vs.reduce((s,p)=>s+p[i],0)/vs.length);
+function oriented(vertices,faces){const center=mean(vertices);return faces.map(f=>{const n=cross(sub(vertices[f[1]],vertices[f[0]]),sub(vertices[f[2]],vertices[f[0]]));return dot(n,sub(mean(f.map(i=>vertices[i])),center))<0?[...f].reverse():f;});}
+function prism(base,h,shift=[0,0],ratio=1){const n=base.length,vertices=[...base.map(([x,y])=>[x,y,0])],faces=[];
+ if(ratio===0){vertices.push([shift[0],shift[1],h]);faces.push([...Array(n).keys()]);for(let i=0;i<n;i++)faces.push([i,(i+1)%n,n]);}
+ else{vertices.push(...base.map(([x,y])=>[x*ratio+shift[0],y*ratio+shift[1],h]));faces.push([...Array(n).keys()],[...Array(n).keys()].map(i=>i+n));for(let i=0;i<n;i++)faces.push([i,(i+1)%n,(i+1)%n+n,i+n]);}
+ return {vertices,faces};}
+const rectangle=(a,b)=>[[-a/2,-b/2],[a/2,-b/2],[a/2,b/2],[-a/2,b/2]];
+const regular=(n,a)=>Array.from({length:n},(_,i)=>{const t=2*PI*i/n+PI/2,r=a/(2*Math.sin(PI/n));return [r*Math.cos(t),r*Math.sin(t)];});
+function revolution(layers,segments){const vertices=[],rings=[],faces=[];
+ for(const [r,z] of layers){if(r===0){rings.push([vertices.length]);vertices.push([0,0,z]);}else{rings.push(Array.from({length:segments},(_,i)=>{const t=2*PI*i/segments;vertices.push([r*Math.cos(t),r*Math.sin(t),z]);return vertices.length-1;}));}}
+ for(let k=0;k<rings.length-1;k++){const a=rings[k],b=rings[k+1];for(let i=0;i<segments;i++){const j=(i+1)%segments;if(a.length===1)faces.push([a[0],b[i],b[j]]);else if(b.length===1)faces.push([a[i],a[j],b[0]]);else faces.push([a[i],a[j],b[j],b[i]]);}}
+ for(const ring of [rings[0],rings.at(-1)])if(ring.length>1)faces.push([...ring]);
+ return {vertices,faces,rings};}
+function createSolid(id,input={},options={}){
+ const spec=getSpec(id),p=defaults(id);
+ for(const [k,v] of Object.entries(input)){if(!Object.hasOwn(p,k))throw new RangeError('未知参数：'+k);if(typeof v!=='number'||!Number.isFinite(v))throw new TypeError('参数必须为有限数：'+k);p[k]=v;}
+ for(const [k,v] of Object.entries(p))if((k==='dx'||k==='dy')?false:(k==='r'||(id==='square-frustum'&&k==='b'))?v<0:v<=0)throw new RangeError('长度参数越界：'+k);
+ if(id==='cone-frustum'&&p.r>p.R)throw new RangeError('上底半径 r 不得大于下底半径 R');
+ if(id==='square-frustum'&&p.b>p.a)throw new RangeError('上底边长 b 不得大于下底边长 a');
+ const seg=options.segments??64;if(!Number.isInteger(seg)||seg<12||seg>256)throw new RangeError('segments 必须为 12–256 的整数');
+ let mesh,volume,area,lateralArea=null,curved=false,featureRings=[],classification=spec.name;
+ const {a,b,c,h,R,r,dx,dy}=p;
+ switch(id){
+ case 'cube':mesh=prism(rectangle(a,a),a);volume=a**3;area=6*a*a;break;
+ case 'cuboid':mesh=prism(rectangle(a,b),c);volume=a*b*c;area=2*(a*b+b*c+c*a);break;
+ case 'triangular-prism':mesh=prism(regular(3,a),h);volume=sqrt(3)/4*a*a*h;lateralArea=3*a*h;area=lateralArea+sqrt(3)/2*a*a;break;
+ case 'hexagonal-prism':mesh=prism(regular(6,a),h);volume=3*sqrt(3)/2*a*a*h;lateralArea=6*a*h;area=lateralArea+3*sqrt(3)*a*a;break;
+ case 'oblique-prism':mesh=prism(rectangle(a,b),h,[dx,dy]);volume=a*b*h;lateralArea=2*a*Math.hypot(h,dy)+2*b*Math.hypot(h,dx);area=lateralArea+2*a*b;classification=(dx===0&&dy===0)?'直四棱柱（矩形底）':'斜四棱柱（矩形底）';break;
+ case 'tetrahedron':mesh=prism(regular(3,a),a*sqrt(2/3),[0,0],0);volume=a**3/(6*sqrt(2));area=sqrt(3)*a*a;break;
+ case 'square-pyramid':mesh=prism(rectangle(a,a),h,[0,0],0);volume=a*a*h/3;lateralArea=2*a*Math.hypot(h,a/2);area=a*a+lateralArea;break;
+ case 'square-frustum':mesh=prism(rectangle(a,a),h,[0,0],b/a);volume=h*(a*a+a*b+b*b)/3;lateralArea=2*(a+b)*Math.hypot(h,(a-b)/2);area=a*a+b*b+lateralArea;classification=b===0?'正四棱锥（棱台极限）':b===a?'正四棱柱（棱台极限）':spec.name;break;
+ case 'cylinder':mesh=revolution([[R,0],[R,h]],seg);volume=PI*R*R*h;lateralArea=2*PI*R*h;area=lateralArea+2*PI*R*R;curved=true;featureRings=mesh.rings;break;
+ case 'cone':mesh=revolution([[R,0],[0,h]],seg);volume=PI*R*R*h/3;lateralArea=PI*R*Math.hypot(R,h);area=lateralArea+PI*R*R;curved=true;featureRings=[mesh.rings[0]];break;
+ case 'cone-frustum':mesh=revolution([[R,0],[r,h]],seg);volume=PI*h*(R*R+R*r+r*r)/3;lateralArea=PI*(R+r)*Math.hypot(h,R-r);area=lateralArea+PI*(R*R+r*r);curved=true;featureRings=mesh.rings.filter(q=>q.length>1);classification=r===0?'圆锥（圆台极限）':r===R?'圆柱（圆台极限）':spec.name;break;
+ case 'sphere':case 'hemisphere':{
+ const half=id==='hemisphere',latSteps=half?16:32,layers=[];
+ for(let i=0;i<=latSteps;i++){const t=half?PI*i/(2*latSteps):-PI/2+PI*i/latSteps;layers.push([(i===latSteps||(!half&&i===0))?0:R*Math.cos(t),R*Math.sin(t)]);}
+ mesh=revolution(layers,seg);volume=(half?2:4)*PI*R**3/3;lateralArea=(half?2:4)*PI*R*R;area=(half?3:4)*PI*R*R;curved=true;featureRings=[mesh.rings[half?0:16]];break;}
+ case 'octahedron':{const t=a/sqrt(2);mesh={vertices:[[t,0,0],[-t,0,0],[0,t,0],[0,-t,0],[0,0,t],[0,0,-t]],faces:[]};for(const x of [0,1])for(const y of [2,3])for(const z of [4,5])mesh.faces.push([x,y,z]);volume=sqrt(2)*a**3/3;area=2*sqrt(3)*a*a;break;}
+ }
+ if(![volume,area,...mesh.vertices.flat()].every(Number.isFinite)||volume<=0||area<=0)throw new RangeError('尺寸导致浮点溢出或下溢，无法可靠建模');
+ mesh.faces=oriented(mesh.vertices,mesh.faces);
+ const edgeMap=new Map();mesh.faces.forEach((f,fi)=>f.forEach((v,i)=>{const w=f[(i+1)%f.length],key=[v,w].sort((a,b)=>a-b).join(':');if(!edgeMap.has(key))edgeMap.set(key,{a:v,b:w,faces:[]});edgeMap.get(key).faces.push(fi);}));
+ const features=new Set();for(const ring of featureRings)ring.forEach((v,i)=>features.add([v,ring[(i+1)%ring.length]].sort((a,b)=>a-b).join(':')));
+ const edges=[...edgeMap.entries()].map(([key,e])=>({...e,feature:!curved||features.has(key)}));
+ const n=(['cube','cuboid','oblique-prism','square-frustum'].includes(id)?4:id==='triangular-prism'?3:id==='hexagonal-prism'?6:0);const vertexLabels=mesh.vertices.map((_,i)=>n&&i>=n?'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[i-n]+"'":'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[i]??'');if(['tetrahedron','square-pyramid'].includes(id)||(id==='square-frustum'&&p.b===0))vertexLabels[vertexLabels.length-1]='S';
+ return {schema:'math-solid/1.0',id,name:spec.name,classification,parameters:p,vertices:mesh.vertices,vertexLabels,faces:mesh.faces,edges,curved,segments:curved?seg:null,metrics:{volume,area,lateralArea},note:spec.note,approximation:curved?'曲面网格仅用于可视化，圆周采用 '+seg+' 段；测度按解析公式计算。':'顶点、棱、面采用解析坐标，浮点存储。'};
+}
+
+const defaultView={yaw:-.62,pitch:.43,zoom:1};
+const defaultLesson={faces:true,hidden:true,labels:false,axis:false};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
+function renderSolidSVG(model,view={},lesson={},options={}){
+ const {yaw,pitch,zoom}={...defaultView,...view},state={...defaultLesson,...lesson};
+ if(![yaw,pitch,zoom].every(Number.isFinite)||zoom<=0)throw new RangeError('视角与缩放必须为有限数，缩放为正');
+ const w=options.width??700,h=options.height??520;
+ if(![w,h].every(Number.isFinite)||w<=0||h<=0)throw new RangeError('画布尺寸必须为正数');
+ const cy=Math.cos(yaw),sy=Math.sin(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch);
+ const right=[cy,sy,0],up=[-sy*sp,cy*sp,cp],camera=[sy*cp,-cy*cp,sp];
+ const vs=model.vertices,lo=[0,1,2].map(i=>Math.min(...vs.map(v=>v[i]))),hi=[0,1,2].map(i=>Math.max(...vs.map(v=>v[i]))),center=lo.map((v,i)=>(v+hi[i])/2);
+ const coords=vs.map(v=>{const q=sub(v,center);return [dot(q,right),-dot(q,up),dot(q,camera)];});
+ // Circumscribed bounding-sphere fit is invariant under camera changes.
+ const radius=Math.max(...vs.map(v=>length(sub(v,center))));
+ const scale=Math.min(w,h)*.37*zoom/radius;
+ const project=q=>[w/2+q[0]*scale,h/2+q[1]*scale];
+ const point=i=>project(coords[i]).map(v=>v.toFixed(3)).join(',');
+ const normals=model.faces.map(f=>{const n=cross(sub(vs[f[1]],vs[f[0]]),sub(vs[f[2]],vs[f[0]]));return n.map(v=>v/length(n));});
+ const visibility=normals.map(n=>dot(n,camera)>1e-10);
+ const faces=model.faces.map((f,i)=>({f,i,depth:f.reduce((s,k)=>s+coords[k][2],0)/f.length})).filter(o=>visibility[o.i]).sort((a,b)=>a.depth-b.depth);
+ const light=[-.35,-.6,.72],surface=faces.map(({f,i})=>{const intensity=Math.max(0,dot(normals[i],light)),lum=76+intensity*12;return `<polygon points="${f.map(point).join(' ')}" fill="hsl(154 24% ${lum.toFixed(1)}%)" stroke="hsl(154 24% ${lum.toFixed(1)}%)" stroke-width=".5" stroke-linejoin="round"/>`;}).join('');
+ const paths=segments=>{const unused=new Set(segments.map((_,i)=>i)),adj=new Map();segments.forEach(([a,b],i)=>{for(const v of [a,b]){if(!adj.has(v))adj.set(v,[]);adj.get(v).push(i);}});let result='';while(unused.size){const first=unused.values().next().value;let vertex=segments[first][0];const endpoint=[...adj.keys()].find(v=>adj.get(v).filter(i=>unused.has(i)).length===1);if(endpoint!==undefined)vertex=endpoint;result+='M'+point(vertex);while(true){const index=adj.get(vertex).find(i=>unused.has(i));if(index===undefined)break;unused.delete(index);const [a,b]=segments[index];vertex=a===vertex?b:a;result+='L'+point(vertex);}}return result;};
+ const solid=[],hidden=[],aux=[];
+ for(const e of model.edges){const front=e.faces.some(i=>visibility[i]),silhouette=e.faces.length===2&&visibility[e.faces[0]]!==visibility[e.faces[1]];
+ if(!(e.feature||silhouette))continue;
+ const d=[e.a,e.b];
+ if(model.id==='sphere'&&e.feature&&!silhouette){if(front||state.hidden)aux.push(d);}else if(front)solid.push(d);else if(state.hidden&&e.feature)hidden.push(d);
+ }
+ let labels='';
+ if(state.labels&&!model.curved){const chars='ABCDEFGHIJKLMNOPQRSTUVWXYZ';labels=vs.map((_,i)=>{const [x,y]=project(coords[i]),vx=x-w/2,vy=y-h/2,dr=Math.hypot(vx,vy)||1;const label=options.vertexLabels?.[i]??model.vertexLabels?.[i]??chars[i];return `<text x="${(x+vx/dr*15).toFixed(2)}" y="${(y+vy/dr*15+4).toFixed(2)}" text-anchor="middle" font-size="14" font-family="Georgia,serif" fill="#234e40" paint-order="stroke" stroke="white" stroke-width="3">${esc(label)}</text>`;}).join('');}
+ let axis='';if(state.axis){const ps=[[0,0,lo[2]],[0,0,hi[2]]].map(v=>{const q=sub(v,center);return project([dot(q,right),-dot(q,up)]).map(x=>x.toFixed(3)).join(',');});axis=`<path d="M${ps[0]}L${ps[1]}" stroke="#ae643b" stroke-width="1.5" stroke-dasharray="7 5"/><circle cx="${ps[0].split(',')[0]}" cy="${ps[0].split(',')[1]}" r="3" fill="#ae643b"/>`;}
+ return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" role="img" aria-label="${esc(model.name)}的正交投影"><title>${esc(model.name)} · 正交投影</title><desc>模型坐标中的尺寸是真实量，投影长度和角度不代表空间真实量。${esc(model.approximation)}</desc><g>${state.faces?surface:''}</g><g fill="none" stroke="#789389" stroke-width="1.25" stroke-dasharray="5 5" stroke-linecap="round"><path d="${paths(hidden)}"/><path d="${paths(aux)}"/></g><path d="${paths(solid)}" fill="none" stroke="#285443" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>${axis}${labels}</svg>`;
+}
+
+const state={R:3,r:1.5,h:3}, view={yaw:-.62,pitch:.43,zoom:1};const initial={...state};const $=id=>document.getElementById(id);const fmt=n=>n.toFixed(2);let drag=null;
+function drawNet(){const {R,r,h}=state,l=Math.hypot(h,R-r),svg=$('net');if(R===r){svg.innerHTML='<rect x="75" y="46" width="330" height="150" fill="#d5e9df" stroke="#176b66" stroke-width="2"/><text x="240" y="30" text-anchor="middle">底面周长 2πR</text><text x="415" y="125">l = h</text>'; $('netnote').textContent='圆柱边界：侧面展开为矩形；示意图不按数值比例绘制。';return}const outer=l*R/(R-r),inner=l*r/(R-r),angle=2*Math.PI*(R-r)/l,half=angle/2,points=[];for(let i=0;i<=200;i++){const a=-half+angle*i/200;for(const radius of [outer,inner])points.push([radius*Math.sin(a),radius*Math.cos(a)])}const xs=points.map(p=>p[0]),ys=points.map(p=>p[1]),xmin=Math.min(...xs),xmax=Math.max(...xs),ymin=Math.min(...ys),ymax=Math.max(...ys),scale=Math.min(410/(xmax-xmin),190/(ymax-ymin)),ox=240-(xmin+xmax)*scale/2,oy=105-(ymin+ymax)*scale/2,point=(radius,a)=>[ox+radius*scale*Math.sin(a),oy+radius*scale*Math.cos(a)],p1=point(outer,-half),p2=point(outer,half),q1=point(inner,-half),q2=point(inner,half),large=angle>Math.PI?1:0;svg.innerHTML=`<path d="M ${p1} A ${outer*scale} ${outer*scale} 0 ${large} 0 ${p2} L ${q2} A ${inner*scale} ${inner*scale} 0 ${large} 1 ${q1} Z" fill="#d5e9df" stroke="#176b66" stroke-width="2"/><text x="240" y="238" text-anchor="middle" fill="#395c55">外弧 2πR · 内弧 2πr · 环宽 l</text>`;$('netnote').textContent='扇环按当前尺寸等比例绘制；r = 0 时退化为扇形。'}
+function draw(){const model=createSolid('cone-frustum',state);$('figure').innerHTML=renderSolidSVG(model,view,{faces:true,hidden:true,labels:false,axis:true})+'<div class="hint">拖动或使用方向键旋转视角</div>';const l=Math.hypot(state.h,state.R-state.r);$('slant').textContent=fmt(l);$('volume').textContent=fmt(model.metrics.volume);$('area').textContent=fmt(model.metrics.area);$('kind').textContent=state.r===0?'圆锥边界':state.r===state.R?'圆柱边界':'圆台';for(const key of ['R','r','h']){$(key).value=state[key];$(key+'value').textContent=state[key].toFixed(1)}$('r').max=state.R;drawNet()}
+for(const key of ['R','r','h'])$(key).addEventListener('input',event=>{state[key]=Number(event.target.value);if(state.r>state.R)state.r=state.R;draw()});$('cone').onclick=()=>{state.r=0;draw()};$('cylinder').onclick=()=>{state.r=state.R;draw()};$('reset').onclick=()=>{Object.assign(state,initial);Object.assign(view,{yaw:-.62,pitch:.43,zoom:1});draw()};$('figure').addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY};$('figure').setPointerCapture(e.pointerId)});$('figure').addEventListener('pointermove',e=>{if(!drag)return;view.yaw+=(e.clientX-drag.x)*.01;view.pitch=Math.max(-1.35,Math.min(1.35,view.pitch+(e.clientY-drag.y)*.01));drag={x:e.clientX,y:e.clientY};draw()});$('figure').addEventListener('pointerup',()=>drag=null);$('figure').addEventListener('pointercancel',()=>drag=null);$('figure').addEventListener('keydown',e=>{if(!e.key.startsWith('Arrow'))return;e.preventDefault();if(e.key==='ArrowLeft')view.yaw-=.12;if(e.key==='ArrowRight')view.yaw+=.12;if(e.key==='ArrowUp')view.pitch=Math.max(-1.35,view.pitch-.12);if(e.key==='ArrowDown')view.pitch=Math.min(1.35,view.pitch+.12);draw()});draw();</script></body></html>
