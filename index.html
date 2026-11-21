@@ -14,7 +14,22 @@
 .cube-view-head p,.cube-problems-head p{margin:0;color:#51675b;font-size:15px}
 .cube-view iframe{display:block;width:100%;height:100%;border:0;background:#fff}
 .cube-problems{display:grid;grid-template-rows:auto minmax(0,1fr);overflow:hidden}
-.cube-problem-list{overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;min-height:0;padding:12px 12px 16px}
+.cube-problem-list{position:relative;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;min-height:0;padding:0 0 16px}
+.cube-switch{position:sticky;top:0;z-index:1;display:flex;gap:6px;padding:8px 12px;background:#fff;border-bottom:1px solid var(--line)}
+.cube-switch button{font:inherit;color:var(--green);background:#fff;border:1px solid var(--line);border-radius:4px;padding:4px 10px;cursor:pointer}
+.cube-switch button[aria-pressed=true]{background:var(--green);color:#f6f4ed;border-color:var(--green)}
+.cube-switch button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.cube-group{padding:4px 12px 8px;scroll-margin-top:46px}
+.cube-group-title{margin:10px 2px 4px;font-size:16px;color:var(--green)}
+.cube-group-note,.collection-attribution,.collection-meta{margin:0 2px 8px;font-size:14px;color:#51675b;text-align:start}
+.collection-problem{border-left-color:#739683}
+.collection-meta{margin:0;padding:0 14px}
+.collection-revision{margin:8px 14px;padding:8px 10px;background:#f6f4ed;border-left:3px solid #739683;font-size:14px;color:#3d5348;text-align:start}
+.collection-revision p,.collection-stem p,.collection-body p{margin:.45em 0}
+.collection-stem,.collection-body{padding:0 14px 8px;text-align:start}
+.collection-label{font-weight:bold;color:var(--green)}
+.collection-stem img,.collection-body img,.collection-revision img{max-width:100%;height:auto;display:block;margin:8px auto;background:#fff}
+.katex-display{display:block;margin:.45em 0;overflow-x:auto}
 .cube-problem-list:focus-visible{outline:2px solid var(--green);outline-offset:-2px}
 .cube-problem{border:1px solid var(--line);border-left:3px solid #9db9a5;border-radius:6px;background:#fff;min-width:0}
 .cube-problem+.cube-problem{margin-top:12px}
@@ -42,8 +57,8 @@
   .cube-problems{display:block;height:auto;overflow:visible}
   .cube-problem-list{overflow:visible}
 }
-</style></head><body><header><div class="eyebrow">SOLID GEOMETRY · 高中数学</div><h1>立体几何，放在一页看懂</h1><p>模型观察 · 方法路径 · 典型例题与解析</p></header><div class="layout"><nav aria-label="页面导航"><b>内容导航</b><a href="#cube-studio">正方体看图做题</a><a href="#models">几何体交互</a><a href="#topic-1">几何体与度量</a><a href="#topic-2">点、线、面的位置关系</a><a href="#topic-3">空间角</a><a href="#topic-4">距离与投影</a><a href="#topic-5">截面、展开与最短路径</a><a href="#topic-6">球与组合体</a><a href="#topic-7">空间向量与坐标</a><a href="#topic-8">动点、最值与存在性</a><a href="#topic-9">综合策略与检查清单</a></nav><main><section id="models"><h2>几何体交互</h2><section id="cube-studio" aria-labelledby="cube-studio-title"><h3 id="cube-studio-title">正方体：看图做题</h3><p class="studio-lead">左侧沿用现有题型图形工作台，打开时即为正方体，可旋转，也可加上常用辅助线与截面。右侧是本页自编的例 3、例 4、例 5、例 6 和例 10，先自己做，再展开答案。图中顶点 A′ 对应题中的 A₁。</p><div class="cube-studio"><div class="cube-view"><div class="cube-view-head"><h4>正方体工作台</h4><p>可旋转，并可添加正方体常用辅助线与截面。<a href="立体几何图形工作台.html" target="_blank" rel="noopener">独立打开工作台</a>，方便截图和导出 SVG。</p></div><iframe title="正方体题型图形工作台" src="立体几何图形工作台.html?embed=1#scene=cube"></iframe></div><div class="cube-problems"><div class="cube-problems-head"><h4 id="cube-problems-title">正方体例题</h4><p>与下方总览中的原文相同，均为自编，不是现成题库。看线面角时，可在左侧选择「体对角线与底面射影」。</p></div><div id="cube-problem-list" class="cube-problem-list" tabindex="0" role="region" aria-label="正方体例题列表"><noscript><p>请在下方总览阅读例 3、例 4、例 5、例 6 与例 10。</p></noscript></div></div></div></section><div class="models"><details class="model frustum"><summary>圆台：体积与表面积专项</summary><p>调整上下底半径与高，对照体积、母线和侧面展开。</p><iframe title="圆台体积与表面积交互" src="圆台交互.html" loading="lazy"></iframe></details></div></section><section aria-label="考点检索"><h2>检索考点</h2><input class="search" type="search" placeholder="输入关键词，如 二面角、球、距离" aria-label="检索考点与例题"><div class="status" aria-live="polite"></div></section><article><h1>高中立体几何｜考点与题型</h1>
-<p>从几何体入手，依次解决位置关系、角与距离、截面和综合问题。下面例题均为自编，答案与解析紧随题干；不同教材对向量内容的要求有所差异。页首可把正方体与例 3、4、5、6、10 放在一起做，答案默认收起。</p>
+</style></head><body><header><div class="eyebrow">SOLID GEOMETRY · 高中数学</div><h1>立体几何，放在一页看懂</h1><p>模型观察 · 方法路径 · 典型例题与解析</p></header><div class="layout"><nav aria-label="页面导航"><b>内容导航</b><a href="#cube-studio">正方体看图做题</a><a href="#models">几何体交互</a><a href="#topic-1">几何体与度量</a><a href="#topic-2">点、线、面的位置关系</a><a href="#topic-3">空间角</a><a href="#topic-4">距离与投影</a><a href="#topic-5">截面、展开与最短路径</a><a href="#topic-6">球与组合体</a><a href="#topic-7">空间向量与坐标</a><a href="#topic-8">动点、最值与存在性</a><a href="#topic-9">综合策略与检查清单</a></nav><main><section id="models"><h2>几何体交互</h2><section id="cube-studio" aria-labelledby="cube-studio-title"><h3 id="cube-studio-title">正方体：看图做题</h3><p class="studio-lead">左侧沿用现有题型图形工作台，打开时即为正方体，可旋转，也可加上常用辅助线与截面。右侧可在本页自编例题和汇编正方体题之间切换，答案默认收起。图中顶点 A′ 对应自编题里的 A₁。</p><div class="cube-studio"><div class="cube-view"><div class="cube-view-head"><h4>正方体工作台</h4><p>可旋转，并可添加正方体常用辅助线与截面。<a href="立体几何图形工作台.html" target="_blank" rel="noopener">独立打开工作台</a>，方便截图和导出 SVG。</p></div><iframe title="正方体题型图形工作台" src="立体几何图形工作台.html?embed=1#scene=cube"></iframe></div><div class="cube-problems"><div class="cube-problems-head"><h4 id="cube-problems-title">正方体例题</h4><p>先做本页自编例题，也可切到汇编中的正方体题。答案默认收起。线面角可在左侧选择「体对角线与底面射影」。</p></div><div id="cube-problem-list" class="cube-problem-list" tabindex="0" role="region" aria-label="正方体例题列表"><noscript><p>请在下方总览阅读例 3、例 4、例 5、例 6 与例 10。</p></noscript></div></div></div></section><div class="models"><details class="model frustum"><summary>圆台：体积与表面积专项</summary><p>调整上下底半径与高，对照体积、母线和侧面展开。</p><iframe title="圆台体积与表面积交互" src="圆台交互.html" loading="lazy"></iframe></details></div></section><section aria-label="考点检索"><h2>检索考点</h2><input class="search" type="search" placeholder="输入关键词，如 二面角、球、距离" aria-label="检索考点与例题"><div class="status" aria-live="polite"></div></section><article><h1>高中立体几何｜考点与题型</h1>
+<p>从几何体入手，依次解决位置关系、角与距离、截面和综合问题。下面例题均为自编，答案与解析紧随题干；不同教材对向量内容的要求有所差异。页首可把正方体与自编例 3、4、5、6、10 放在一起做，也可查看汇编中的正方体题；答案默认收起。</p>
 <h2 id="topic-1">几何体与度量</h2>
 <h3>识图与结构</h3>
 <p>柱体的侧棱平行且相等；锥体各侧棱交于顶点；台体由平行于锥体底面的平面截锥得到。球面上各点到球心的距离相等。斜二测画法是示意表达，图上的长度与角度通常不能直接测量。</p>
@@ -124,15 +139,30 @@
 <li>能用几何法直接定位关系时先画辅助线；垂直关系多而计算繁复时，可建立正交坐标并求方向、法向量。</li>
 <li>最后核对角的范围、参数端点、单位、面积是否包含底面，以及截面和垂足是否落在所要求的对象上。</li>
 </ol>
-<p>本页为高中立体几何主要考点与典型题型的教学总览，例题为自编，并非现有题库或全部试题的汇编。</p>
-</article><footer>模型来源：高中数学常见几何体资产库 1.0.0 与本地圆台交互；例题自编。资料供本地教学使用。</footer></main></div><script>
+<p>本页总览中的例题为自编，并非现有题库的整册汇编。页首另收汇编里题干为正方体的 7 题，来源与版权见页脚。</p>
+</article><footer>模型来源：高中数学常见几何体资产库 1.0.0 与本地圆台交互；本页例题自编。汇编正方体题来自<a href="https://github.com/cheng-bai/shanghai-math-essay-collection/blob/main/分册/立体几何.md" target="_blank" rel="noopener">上海高中数学大题分类汇编 · 立体几何分册</a>，公开发布不代表对原试题与题图拥有排他版权。资料供本地教学使用。</footer></main></div><script>
 const input=document.querySelector('.search'),article=document.querySelector('article'),status=document.querySelector('.status');const nodes=[...article.children];const groups=[];let current=null;for(const node of nodes){if(node.tagName==='H2'){current=[];groups.push(current)}if(current)current.push(node)}input.addEventListener('input',()=>{const term=input.value.trim().toLowerCase();let matches=0;for(const group of groups){const visible=!term||group.some(node=>node.textContent.toLowerCase().includes(term));group.forEach(node=>node.classList.toggle('hidden',!visible));if(visible)matches++}status.textContent=term?'匹配 '+matches+' 个考点栏目':''});
 </script>
+<script src="data/cube-collection.js"></script>
 <script>
 (function(){
   const examples=[['3','线面垂直'],['4','异面直线所成角'],['5','线面角'],['6','二面角'],['10','正方体外接球']];
   const list=document.getElementById('cube-problem-list');
   if(!list)return;
+  const switcher=document.createElement('div');
+  switcher.className='cube-switch';
+  switcher.setAttribute('role','tablist');
+  switcher.setAttribute('aria-label','例题分组');
+  const local=document.createElement('section');
+  local.id='cube-local';
+  local.className='cube-group';
+  const localTitle=document.createElement('h5');
+  localTitle.className='cube-group-title';
+  localTitle.textContent='本页例题';
+  const localNote=document.createElement('p');
+  localNote.className='cube-group-note';
+  localNote.textContent='例 3、4、5、6、10 为本页自编，与下方总览原文相同，不是汇编题目。';
+  local.append(localTitle,localNote);
   for(const [id,topic] of examples){
     const stem=document.querySelector('[data-cube-problem="'+id+'"]');
     const answer=document.querySelector('[data-cube-answer="'+id+'"]');
@@ -154,13 +184,79 @@ const input=document.querySelector('.search'),article=document.querySelector('ar
     summary.textContent='答案与解析';
     details.append(summary,answerClone);
     card.append(kicker,stemClone,details);
-    list.append(card);
+    local.append(card);
   }
-  if(!list.querySelector('.cube-problem')){
-    const note=document.createElement('p');
-    note.textContent='例题仍在下方总览中。';
-    list.append(note);
+  const collection=document.createElement('section');
+  collection.id='cube-collection';
+  collection.className='cube-group';
+  const collectionTitle=document.createElement('h5');
+  collectionTitle.className='cube-group-title';
+  collectionTitle.textContent='汇编题目';
+  const attribution=document.createElement('p');
+  attribution.className='collection-attribution';
+  attribution.append('题目来自');
+  const sourceLink=document.createElement('a');
+  sourceLink.href='https://github.com/cheng-bai/shanghai-math-essay-collection/blob/main/分册/立体几何.md';
+  sourceLink.target='_blank';
+  sourceLink.rel='noopener';
+  sourceLink.textContent='上海高中数学大题分类汇编 · 立体几何分册';
+  attribution.append(sourceLink,'。这里只收题干为正方体的 7 题，不是整册。公开发布不代表对原试题与题图拥有排他版权，权利归相应权利人。题图链到汇编站点，不放进本仓库。');
+  collection.append(collectionTitle,attribution);
+  const items=Array.isArray(window.CUBE_COLLECTION)?window.CUBE_COLLECTION:[];
+  for(const item of items){
+    const card=document.createElement('div');
+    card.className='cube-problem collection-problem';
+    card.dataset.collectionId=item.id;
+    const kicker=document.createElement('p');
+    kicker.className='cube-kicker';
+    kicker.textContent=item.heading;
+    const source=document.createElement('p');
+    source.className='collection-meta';
+    source.textContent='来源：'+item.source;
+    const skill=document.createElement('p');
+    skill.className='collection-meta';
+    const skillLabel=document.createElement('strong');
+    skillLabel.textContent='考点说明：';
+    skill.append(skillLabel,document.createTextNode(item.skill));
+    card.append(kicker,source,skill);
+    if(item.revisionHtml){
+      const revision=document.createElement('div');
+      revision.className='collection-revision';
+      revision.innerHTML=item.revisionHtml;
+      card.append(revision);
+    }
+    const stem=document.createElement('div');
+    stem.className='collection-stem';
+    stem.innerHTML=item.stemHtml;
+    const details=document.createElement('details');
+    details.className='cube-answer';
+    const summary=document.createElement('summary');
+    summary.textContent='答案与解析';
+    const body=document.createElement('div');
+    body.className='collection-body';
+    body.innerHTML='<p class="collection-label">答案</p>'+item.answerHtml+'<p class="collection-label">解析</p>'+item.analysisHtml;
+    details.append(summary,body);
+    card.append(stem,details);
+    collection.append(card);
   }
+  function showGroup(id){
+    const target=document.getElementById(id);
+    const scrolling=getComputedStyle(list).overflowY!=='visible';
+    if(scrolling) list.scrollTo({top:Math.max(0,target.offsetTop-switcher.offsetHeight),behavior:'smooth'});
+    else target.scrollIntoView({behavior:'smooth',block:'start'});
+    for(const button of switcher.querySelectorAll('button')) button.setAttribute('aria-pressed',String(button.getAttribute('aria-controls')===id));
+  }
+  for(const [id,label] of [['cube-local','本页例题'],['cube-collection','汇编题目']]){
+    const button=document.createElement('button');
+    button.type='button';
+    button.setAttribute('role','tab');
+    button.setAttribute('aria-controls',id);
+    button.setAttribute('aria-pressed',String(id==='cube-local'));
+    button.textContent=label;
+    button.addEventListener('click',()=>showGroup(id));
+    switcher.append(button);
+  }
+  list.append(switcher,local,collection);
 })();
 </script>
 </body></html>

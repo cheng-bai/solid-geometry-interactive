@@ -1,0 +1,98 @@
+{
+  "sourceRepo": "https://github.com/cheng-bai/shanghai-math-essay-collection",
+  "volume": "分册/立体几何.md",
+  "volumeUrl": "https://github.com/cheng-bai/shanghai-math-essay-collection/blob/main/分册/立体几何.md",
+  "note": "只收录题干为正方体的 7 题。公开发布不代表对原试题与题图拥有排他版权。",
+  "figures": [
+    "0b1e2fa111dc09049d629246.jpg",
+    "4e0119728b9c1fa7f5619035.jpg",
+    "66071db33b3bc8c03e348996.jpg",
+    "67b5ebd222a62c7ea64aed92.jpg",
+    "7a729b2bcabc0b7e7814703e.jpg",
+    "909e0737f96891ca0ab1312d.jpg",
+    "9917283b57249b92d4414d69.jpg",
+    "9e9e535e7779798df2847f7f.jpg",
+    "a5f9618d8db68344bb76e293.jpg",
+    "af329a49bcb5689c3cb0be5e.jpg",
+    "b9eb35aeee3bd51a15273606.jpg",
+    "d30d2073f3013a1da0e3a14c.jpg",
+    "d9cf205283023ca4cc572abe.jpg",
+    "e1173e4769264a4d2a8ccd66.jpg",
+    "e844632bbfbf40cb51e639a3.jpg",
+    "eb106c705bb884a1b3ca3ffc.jpg",
+    "ebb874bc219f26c06d78446a.jpg",
+    "f21ec671c4f84aaac6c94c0e.jpg"
+  ],
+  "problems": [
+    {
+      "id": "018",
+      "heading": "018 · 原第17题",
+      "source": "S031 · 上海外国语大学附属外国语学校松江云间中学 · 高二 · 2025-2026 · 期中 · 原第17题",
+      "skill": "正方体中借助平面交线证明点共线，并证明两条直线异面。",
+      "revision": "**校订提示**\n\n题干“$BP$ 与 $HG$ 相交于点 $Q$”中的 $BP$ 应为 $EF$：由解析 $Q\\in EF\\subset$ 平面 $ABCD$、$Q\\in HG\\subset$ 平面 $CDD_1C_1$ 可确认相交的是 $EF$ 与 $HG$。\n\n下列正文保留原转录；与本提示冲突的文字或公式不作为有效依据。",
+      "stem": "如图，已知 $E, F, G, H$ 分别是正方体 $ABCD - A_{1}B_{1}C_{1}D_{1}$ 的棱 $AB, BC, CC_{1}, C_{1}D_{1}$ 的中点，且 $BP$ 与 $HG$ 相交于点 $Q$ .\n\n![](../assets/b9eb35aeee3bd51a15273606.jpg)\n\n(1) 求证: 点 $Q$ 在直线 $DC$ 上;\n\n(2) 求证: $EF$ 与 $A_{1}B_{1}$ 是异面直线.",
+      "answer": "(1) 证明见解析\n\n(2) 证明见解析",
+      "analysis": "(1) 平面 $ABCD \\cap$ 平面 $CDD_{1}C_{1} = DC,$\n\n由于 $Q \\in EF \\subset$ 平面ABCD, $Q \\in HG \\subset$ 平面 $CDD_{1}C_{1}$ ,\n\n所以 $Q \\in DC$ ，也即点 $Q$ 在直线 $DC$ 上.\n\n(2) 假设EF与 $A_{1}B_{1}$ 不是异面直线.\n\n则 $EF$ 与 $A_{1}B_{1}$ 是共面直线，又 $E$ 在直线 $A_{1}B_{1}$ 外，\n\n则过E与直线 $A_{1}B_{1}$ 有唯一平面 $BAA_{1}B_{1}$ ，所以可得 $F\\in$ 平面 $BAA_{1}B_{1}$ ,\n\n这与 $F$ 在平面 $BAA_{1}B_{1}$ 外矛盾，故 $EF$ 与 $A_{1}B_{1}$ 是异面直线.\n\n\n---"
+    },
+    {
+      "id": "020",
+      "heading": "020 · 原第20题",
+      "source": "S031 · 上海外国语大学附属外国语学校松江云间中学 · 高二 · 2025-2026 · 期中 · 原第20题",
+      "skill": "正方体截面的周长与面积；截面形状与参数范围；截面分割与体积比",
+      "revision": "",
+      "stem": "在棱长为1的正方体 $ABCD-A_{1}B_{1}C_{1}D_{1}$ 中，E是BC的中点，F,G分别是CD, $DD_{1}$ 上的动点.考查过E,F,G三点的平面截正方体所得的截面：\n\n![](../assets/af329a49bcb5689c3cb0be5e.jpg)\n\n![](../assets/4e0119728b9c1fa7f5619035.jpg)\n\n(1) 当 $F$ 是 $CD$ 的中点且 $G$ 是 $DD_{1}$ 的中点时, 直接写出截面的周长和面积;\n\n(2) 当 $\\frac{DF}{DC} = \\frac{1}{3}$ 时，若截面为六边形，求 $\\frac{DG}{DD_1}$ 的取值范围；\n\n(3) 当 $G$ 是 $DD_{1}$ 的中点且截面为五边形时, 是否存在点 $F$ , 使得截面将正方体分为体积比1:2的两个部分, 若存在, 求出 $\\frac{DF}{DC}$ 的值; 若不存在, 说明理由.",
+      "answer": "(1) 周长为 $3\\sqrt{2}$ ，面积为 $\\frac{3\\sqrt{3}}{4}$ ;\n\n(2) $\\frac{DG}{DD_1} \\in \\left(\\frac{1}{5}, \\frac{1}{2}\\right)$\n\n(3) 存在, $\\frac{DF}{DC} = 3\\sqrt{2} - 4$ 或 $\\frac{DF}{DC} = 5 - 3\\sqrt{2}$",
+      "analysis": "(1) 作图：取 $A_{1}B_{1}, A_{1}D_{1}, BB_{1}$ 中点，连接这六个点即可得到截面，\n\n![](../assets/eb106c705bb884a1b3ca3ffc.jpg)\n\n由图可知截面是边长为 $\\frac{\\sqrt{2}}{2}$ 的正六边形，\n\n∴周长为 $3\\sqrt{2}$ ，面积为 $\\frac{3\\sqrt{3}}{4}$ ;\n\n(2) 分别找出截面为六边形的两种临界情况，分别如下图所示: 情况①\n\n![](../assets/7a729b2bcabc0b7e7814703e.jpg)\n\n∵E为BC中点，∴BM=CF= $\\frac{2}{3}$ AB，即AM= $\\frac{5}{3}$ AB,\n\n$$\n\\because \\frac {G N}{A _ {1} N} = \\frac {N F}{M N} = \\frac {D F}{A M} = \\frac {\\frac {1}{3} C D}{\\frac {5}{3} A B} = \\frac {1}{5},\n$$\n\n$$\n\\therefore \\frac {D G}{D D _ {1}} = \\frac {G N}{A _ {1} N} = \\frac {1}{5},\n$$\n\n情况②\n\n![](../assets/e1173e4769264a4d2a8ccd66.jpg)\n\n∵E为BC中点，∴BM=CF= $\\frac{2}{3}$ AB，即AM= $\\frac{5}{3}$ AB,\n\n$$\n\\because \\frac {G N}{P N} = \\frac {N F}{M N} = \\frac {D F}{A M} = \\frac {\\frac {1}{3} C D}{\\frac {5}{3} A B} = \\frac {1}{5},\n$$\n\n$\\because \\frac{BB_{1}}{PA} = \\frac{MB}{AM} = \\frac {2}{5}$ 即 $PA = \\frac{5}{2} BB_{1} = \\frac{5}{2} DD_{1}$\n\n$$\n\\therefore \\frac {D G}{D D _ {1}} = \\frac {D G}{\\frac {2}{5} A P} = \\frac {5}{2} \\frac {D G}{A P} = \\frac {5}{2} \\times \\frac {1}{5} = \\frac {1}{2},\n$$\n\n故 $\\frac{DG}{DD_1} \\in \\left( \\frac{1}{5}, \\frac{1}{2} \\right)$\n\n(3) (1) 如图, 截面与 $A_{1}D_{1}, B_{1}C_{1}$ 相较于点 $M, N$ , 延长 $MG, AD$ 相较于点 $Q$ , 连接 $EQ$ 交 $CD$ 与点 $F$ ,\n\n![](../assets/67b5ebd222a62c7ea64aed92.jpg)\n\n设 $DF = \\lambda (\\lambda \\in (0,1))$ ， $\\because \\frac{DQ}{CE} = \\frac{DF}{CF} = \\frac{\\lambda}{1 - \\lambda},\\therefore DQ = \\frac{\\lambda}{2 - 2\\lambda},$\n\n∵G为 $DD_{1}$ 中点，∴ $MD_{1}=DQ=\\frac{\\lambda}{2-2\\lambda}$ ,\n\n延长NE, GF, $CC_{1}$ 相交于点P，延长NM, FG, $C_{1}D_{1}$ 相交于点O,\n\n![](../assets/d9cf205283023ca4cc572abe.jpg)\n\n∵G为 $DD_{1}$ 中点，∴ $OD_{1}=DF=\\lambda,$\n\n又 $\\because\\frac{OD_{1}}{OC_{1}}=\\frac{MD_{1}}{NC_{1}}=\\frac{\\lambda}{1+\\lambda}=\\frac{\\frac{\\lambda}{2-2\\lambda}}{NC_{1}},\\therefore NC_{1}=\\frac{1+\\lambda}{2-2\\lambda},$\n\n$$\n\\because \\frac {P C}{P C _ {1}} = \\frac {E C}{N C _ {1}} = \\frac {P C}{P C + 1} = \\frac {\\overline {{2}}}{1 + \\lambda}, \\therefore P C = \\frac {1 - \\lambda}{2 \\lambda},\n$$\n\n正方体被截得的其中一个多面体体积为V,\n\n则 $V = V_{N - C_1OP} - V_{E - CFP} - V_{M - ODG},$\n\n$$\n\\frac {1}{3} = \\frac {1}{3} \\times \\frac {1 + \\lambda}{2 - 2 \\lambda} \\times \\frac {1}{2} \\times (1 + \\lambda) \\times \\frac {1 + \\lambda}{2 \\lambda} - \\frac {1}{3} \\times \\frac {1}{2} \\times \\frac {1}{2} \\times (1 - \\lambda) \\times \\frac {1 - \\lambda}{2 \\lambda} - \\frac {1}{3} \\times \\frac {\\lambda}{2 - 2 \\lambda}\n$$\n\n$$\n1 = \\frac {(1 + \\lambda) ^ {3}}{8 \\lambda - 8 \\lambda^ {2}} - \\frac {(1 - \\lambda) ^ {2}}{8 \\lambda} - \\frac {\\lambda^ {2}}{8 - 8 \\lambda}\n$$\n\n整理得 $\\lambda^2 + 8\\lambda - 2 = 0$ ，解得 $\\lambda = \\pm 3\\sqrt{2} - 4$\n\n$\\because \\lambda \\in (0,1), \\therefore \\lambda = 3\\sqrt{2} - 4,$\n\n即 $\\frac{DF}{DC} = \\lambda = 3\\sqrt{2} - 4,$\n\n(2) 如图:\n\n![](../assets/f21ec671c4f84aaac6c94c0e.jpg)\n\n∵点E为BC中点，∴NB=CF,\n\n∵点G为 $DD_{1}$ 中点，∴ $DG=\\frac{1}{2}$ ,\n\n设 $DF = \\mu$ （ $\\mu \\in (0,1)$ ），则 $NB = CF = 1 - \\mu, AN = 2 - \\mu$\n\n又∵ $\\frac{DF}{AN}=\\frac{DM}{AM}$ ，即 $\\frac{\\mu}{2-\\mu}=\\frac{DM}{DM+1}$ ，∴ $DM=\\frac{\\mu}{2-2\\mu}$ ， $AM=DM+1=\\frac{2-\\mu}{2-2\\mu}$\n\n$\\because \\frac{GD}{AP} = \\frac{DM}{AM}$ 即 $\\frac{GD}{AP} = \\frac{\\mu}{2 - \\mu},\\therefore AP = \\frac{2 - \\mu}{2\\mu},$\n\n$\\because \\frac{BT}{AP} = \\frac{NB}{AN}$ 即 $\\frac{BT}{\\frac{2 - \\mu}{2\\mu}} = \\frac{1 - \\mu}{2 - \\mu},\\therefore BT = \\frac{1 - \\mu}{2\\mu}$\n\n其中一个多面体体积为 $V$\n\n则 $V = V_{P - AMN} - V_{T - BNE} - V_{G - DFM}$\n\n$$\n\\frac {1}{3} = \\frac {1}{3} \\times \\frac {2 - \\mu}{2 \\mu} \\times \\frac {1}{2} \\times \\frac {2 - \\mu}{2 - 2 \\mu} \\times (2 - \\mu) - \\frac {1}{3} \\times \\frac {1 - \\mu}{2 \\mu} \\times \\frac {1}{2} \\times \\frac {1}{2} \\times (1 - \\mu) - \\frac {1}{3} \\times \\frac {1}{2} \\times \\frac {1}{2}\n$$\n\n$$\n\\times \\mu \\times \\frac {\\mu}{2 - 2 \\mu}\n$$\n\n$$\n8 u - 8 u ^ {2} = (2 - \\mu) ^ {3} - (1 - \\mu) ^ {3} - \\mu^ {3}\n$$\n\n化简得 $\\mu^3 - 11\\mu^2 + 17\\mu - 7 = 0$ ，即 $(\\mu - 1)(\\mu^2 - 10\\mu + 7) = 0$\n\n$\\therefore \\mu = 1$ 或 $\\mu = 5 \\pm 3\\sqrt{2}$ , $\\because \\mu \\in (0,1)$ ,\n\n$$\n\\therefore \\mu = 5 - 3 \\sqrt {2},\n$$\n\n即 $\\frac{DF}{DC} = \\mu = 5 - 3\\sqrt{2}$\n\n综上所述，这样的点存在， $\\frac{DF}{DC} = 3\\sqrt{2} -4$ 或 $\\frac{DF}{DC} = 5 - 3\\sqrt{2}$\n\n\n---"
+    },
+    {
+      "id": "032",
+      "heading": "032 · 原第18题",
+      "source": "S054 · 上海市大同中学 · 高二 · 2025-2026 · 期中 · 原第18题",
+      "skill": "空间向量证线线垂直；空间向量求直线角；线段上定距离点",
+      "revision": "**校订提示**\n\n第（3）问原 PDF 第13页写“棱 C′D”，该指定对象实际为侧面对角线，按线段 C′D 理解，不改成 C′D′；距离目标是平面 B′MN。以 C 为原点，平面 $x+y=1$，$E=(\\lambda,0,1-\\lambda)$，$0\\le\\lambda\\le1$。由距离式得 $\\lambda=2/3$，故 $C′E=2\\sqrt2/3$。\n\n下列正文保留原转录；与本提示冲突的文字或公式不作为有效依据。",
+      "stem": "如图，已知正方体 $A B C D - A ^ { \\prime } B ^ { \\prime } C ^ { \\prime } D ^ { \\prime }$ 的棱长为1，点M、N分别是 $B B ^ { \\prime }$ 和 $| C A ^ { \\prime }$ 的中点.\n\n![](../assets/d30d2073f3013a1da0e3a14c.jpg)\n\n(1) 求证: $M N \\bot B B ^ { \\prime }$\n\n(2) 求直线 $B C ^ { \\prime }$ 和 $M N$ 所成角的大小;\n\n(3） 棱C'D上是否存在一点E，使得E到平面 $C ^ { \\prime } D$ $B ^ { \\prime } M N$ 的距离为 ${ \\frac { \\sqrt { 2 } } { 6 } } ?$ 若存在，请求出线段 $C ^ { \\prime } .$ E的长度，若不存在，请说明理由.",
+      "answer": "(1) 证明见解析\n\n(2) $6 0 ^ { \\circ }$\n\n(3) 存在, $C ^ { \\prime } E = \\frac { 2 \\sqrt { 2 } } { 3 }$",
+      "analysis": "(1) 如图所示，以C为坐标原点， $C D , C B , C C ^ { \\prime }$ 分别为x,y,z轴建立空间直角坐标系，\n\n![](../assets/ebb874bc219f26c06d78446a.jpg)\n\n$$\nB \\left( 0 , 1 , 0 \\right) , C \\left( 0 , 0 , 0 \\right) , D \\left( 1 , 0 , 0 \\right) , A ^ { \\prime } \\left( 1 , 1 , 1 \\right) , B ^ { \\prime } \\left( 0 , 1 , 1 \\right) , C ^ { \\prime } \\left( 0 , 0 , 1 \\right) , D ^ { \\prime } \\left( 0 , 0 , 1 \\right)\n$$\n\n因为点M、N分别是BB'和CA'的中点，则 $M \\left( 0 , 1 , { \\frac { 1 } { 2 } } \\right) , N \\left( { \\frac { 1 } { 2 } } , { \\frac { 1 } { 2 } } , { \\frac { 1 } { 2 } } \\right)$\n\n可得 $\\overrightarrow { \\cdot M N } = \\left( \\frac { 1 } { 2 } , - \\frac { 1 } { 2 } , 0 \\right) , \\overrightarrow { B B ^ { \\prime } } = ( 0 , 0 , 1 )$\n\n因为 $\\overrightarrow { M N } \\cdot \\overrightarrow { B B ^ { \\prime } } = \\frac { 1 } { 2 } - \\frac { 1 } { 2 } + 0 = 0$ ，所以 $M N \\bot B B ^ { \\prime }$\n\n(2)由（1）可知: $\\overrightarrow { M N } = \\left( \\frac { 1 } { 2 } , - \\frac { 1 } { 2 } , 0 \\right) , \\overrightarrow { B C ^ { \\prime } } = ( 0 , - 1 , 1 )$\n\n设直线 $B C ^ { \\prime }$ 和MN所成角的大小θ，则 $0 ^ { \\circ } \\leq \\theta \\leq 6 0 ^ { \\circ }$\n\nM·BC' 1 则cos θ = COS MN, BC' 二 二 2 12 M BC' √2 ×√2 2\n\n可得 $\\theta = 6 0 ^ { \\circ }$ ，所以直线BC'和MN所成角的大小为60°.\n\n(3）由（1）可知： $\\overrightarrow { M N } = \\left( \\frac { 1 } { 2 } , - \\frac { 1 } { 2 } , 0 \\right) , \\overrightarrow { M B ^ { \\prime } } = \\left( 0 , 0 , \\frac { 1 } { 2 } \\right) , \\overrightarrow { B ^ { \\prime } C ^ { \\prime } } = ( 0 , - 1 , 1 ) , \\overrightarrow { C ^ { \\prime } D } = ( 1 , 0 , - 1 )$\n\n设平面 $B ^ { \\prime } M N$ 的法向量为 $\\vec { \\mid n } = ( x , y , z )$ ，则 $\\left\\{ \\begin{array} { l l } { { \\displaystyle { \\vec { n } } \\cdot { \\overrightarrow { M N } } = { \\frac { 1 } { 2 } } x - { \\frac { 1 } { 2 } } y = 0 } } \\\\ { { \\displaystyle { \\vec { n } } \\cdot { \\overrightarrow { M B ^ { \\prime } } } = { \\frac { 1 } { 2 } } z = 0 } } \\end{array} \\right. \\nonumber$\n\n设 $x = 1$ ，则 $y = 1 , z = 0$ ，可得 $\\vec { \\mathsf { \\Pi } } _ { \\vec { \\mathsf { F } } } \\vec { n } = ( 1 , 1 , 0 )$\n\n设 $\\overrightarrow { C ^ { \\prime } E } = \\lambda \\overrightarrow { C ^ { \\prime } D } = \\left( \\lambda , 0 , - \\lambda \\right)$ $\\lambda \\in [ 0 , 1 ]$ ，可得 $\\overrightarrow { B ^ { \\prime } E } = \\overrightarrow { B ^ { \\prime } C ^ { \\prime } } + \\overrightarrow { C ^ { \\prime } E } = \\lambda \\overrightarrow { C ^ { \\prime } D } = ( \\lambda , - 1 , - \\lambda )$\n\n因为点E到平面 $B ^ { \\prime } M N$ 的距离为 ${ \\frac { \\left| { \\overrightarrow { B ^ { \\prime } E } } \\cdot { \\overrightarrow { n } } \\right| } { \\left| { \\overrightarrow { n } } \\right| } } = { \\frac { \\left| \\lambda - 1 \\right| } { \\sqrt { 2 } } } = { \\frac { \\sqrt { 2 } } { 6 } }$ ，解得 $\\lambda = \\frac { 2 } { 3 }$ 或 $\\lambda = \\frac 4 3$ (舍去),\n\n所以存在点E， $C ^ { \\prime } E = { \\frac { 2 } { 3 } } C ^ { \\prime } C = { \\frac { 2 { \\sqrt { 2 } } } { 3 } }$\n\n\n---"
+    },
+    {
+      "id": "040",
+      "heading": "040 · 原第17题",
+      "source": "S018 · 上海市第五十四中学 · 高二 · 2025-2026 · 期中 · 原第17题",
+      "skill": "用平行线传递性证明四点共面；异面直线所成角的平移法",
+      "revision": "",
+      "stem": "在正方体 $ABCD - A_{1}B_{1}C_{1}D_{1}$ 中， $E$ 为棱 $B_{1}C_{1}$ 的中点， $F$ 为棱 $D_{1}C_{1}$ 的中点\n\n![](../assets/909e0737f96891ca0ab1312d.jpg)\n\n(1) 求证: $E 、 F 、 B 、 D$ 四点共面;\n\n(2) 求异面直线EF与 $AD_{1}$ 所成角的大小.",
+      "answer": "(1) 证明见解析. (2) $\\frac{\\pi}{3}$",
+      "analysis": "(1) 根据三角形中位线定理和平行线的传递性, 可证 $EF \\parallel BD$ , 即可推证结论;\n\n(2) 由直线间的平行关系, 可得异面直线EF与 $AD_{1}$ 所成角就是角 $\\angle AD_{1}B_{1}$ .\n\n(1) 连接 $B_{1}D_{1}$ ,\n\n∵ E 为棱 $B_{1}C_{1}$ 的中点, F 为棱 $D_{1}C_{1}$ 的中点, ∴ $EF // B_{1}D_{1}$\n\n∵正方体ABCD-A\\_{1}B\\_{1}C\\_{1}D\\_{1},∴BB\\_{1}=DD\\_{1},BB\\_{1}//DD\\_{1}\n\n∴四边形 $BB_{1}D_{1}D$ 是平行四边形,∴ $BD//B_{1}D_{1}$ ,\n\n$\\therefore BD // EF, BD, EF$ 确定一平面.\n\n$\\therefore E 、 F 、 B 、 D$ 四点共面；\n\n(2) 由 (1) 得: $EF \\parallel B_{1}D_{1}$\n\n$\\therefore \\angle AD_{1}B_{1}$ 或补角为异面直线 $EF$ 与 $AD_{1}$ 所成角，\n\n在 $\\Delta AD_{1}B_{1}$ 中， $AD_{1} = D_{1}B_{1} = B_{1}A,\\therefore \\angle AD_{1}B_{1} = \\frac{\\pi}{3}$\n\n∴异面直线EF与 $AD_{1}$ 所成角为 $\\frac{\\pi}{3}$ .\n\n本题考查点共面,关键要对确定平面的条件要熟练掌握;考查空间角,空间角用几何法求,要体现作、证、算三步骤.\n\n\n---"
+    },
+    {
+      "id": "049",
+      "heading": "049 · 原第17题",
+      "source": "S027 · 上海市长征中学 · 高二 · 2025-2026 · 期中 · 原第17题",
+      "skill": "正方体各面中心构成的正八面体体积计算。并分析相关参数与取值。",
+      "revision": "",
+      "stem": "如图所示，正方体的棱长为3，试计算以其所有面的中心为顶点的多面体的体积.\n\n![](../assets/0b1e2fa111dc09049d629246.jpg)",
+      "answer": "$\\frac{9}{2}$",
+      "analysis": "结合图形分析可得以正方体所有面的中心为顶点的多面体是由两个有公共底面的正四棱锥组合而成的八面体,根据棱锥的体积公式可求得其体积.\n\n由题意知，所给的几何体是八面体，它由两个有公共底面的正四棱锥组合而成.\n\n因为正方体的棱长为3，所以四棱锥的高为 $\\frac{3}{2}$\n\n![](../assets/66071db33b3bc8c03e348996.jpg)\n\n因为正方体任意两个相邻的侧面中心间的距离等于其面对角线的一半，即 $\\frac{3\\sqrt{2}}{2}$ ，所以该正四棱锥底面面积为 $\\frac{3\\sqrt{2}}{2}\\times\\frac{3\\sqrt{2}}{2}=\\frac{9}{2}$ .\n\n所以这个八面体的体积为 $2V_{正四棱锥}=2\\times\\frac{1}{3}\\times\\frac{9}{2}\\times\\frac{3}{2}=\\frac{9}{2}$ .\n\n\n---"
+    },
+    {
+      "id": "055",
+      "heading": "055 · 原第20题",
+      "source": "S038 · 上海海洋大学附属大团高级中学 · 高二 · 2025-2026 · 期中 · 原第20题",
+      "skill": "空间向量的基向量表示；直线与平面所成的角；异面直线所成角与参数",
+      "revision": "",
+      "stem": "如图， $ABCD - A_{1}B_{1}C_{1}D_{1}$ 为正方体，动点 $P$ 在对角线 $BD_{1}$ 上，记 $\\frac{|D_1P|}{|D_1B|} = \\lambda .$\n\n![](../assets/9917283b57249b92d4414d69.jpg)\n\n(1) 用向量 $\\overrightarrow{AB}$ 、 $\\overrightarrow{AD}$ 、 $\\overrightarrow{AA_{1}}$ 表示向量 $\\overrightarrow{AC_{1}}$ ;\n\n(2) 若 $\\lambda = \\frac{1}{2}$ , 求直线 $AP$ 与平面 $PBC$ 所成角的大小;\n\n(3) 若异面直线AP与 $D_{1}B_{1}$ 所成角为 $\\frac{\\pi}{4}$ ，求 $\\lambda$ 的值.",
+      "answer": "(1) $\\overrightarrow{AC_1} = \\overrightarrow{AB} +\\overrightarrow{AD} +\\overrightarrow{AA_1}$\n\n(2) $\\theta = \\arcsin \\frac{\\sqrt{6}}{3}$\n\n(3) $\\lambda = 1$",
+      "analysis": "(1) $\\overrightarrow{AC_1} = \\overrightarrow{AC} +\\overrightarrow{CC_1} = \\overrightarrow{AB} +\\overrightarrow{AD} +\\overrightarrow{AA_1};$\n\n(2) 建立如图所示空间直角坐标系，设正方体边长为1,\n\n![](../assets/9e9e535e7779798df2847f7f.jpg)\n\n则有 $A(1,0,0),B(1,1,0),C(0,1,0),D_{1}(0,0,1)$ ，又因为 $\\frac{|D_1P|}{|D_1B|} = \\lambda ,$\n\n所以 $\\overrightarrow{D_1B} = (1,1, - 1),\\overrightarrow{D_1P} = (\\lambda ,\\lambda , - \\lambda),$\n\n所以 $\\overrightarrow{PA} = \\overrightarrow{PD_1} +\\overrightarrow{D_1A} = (-\\lambda_2, - \\lambda ,\\lambda) + (1,0, - 1) = (1 - \\lambda , - \\lambda ,\\lambda -1),$\n\n若 $\\lambda = \\frac{1}{2}$ ，则 $\\overrightarrow{PA} = \\left(\\frac{1}{2}, - \\frac{1}{2}, - \\frac{1}{2}\\right),P\\left(\\frac{1}{2},\\frac{1}{2},\\frac{1}{2}\\right),$\n\n设平面PBC的法向量为 $\\overrightarrow{n}=(x,y,z)$ ,\n\n$$\n\\overrightarrow {P C} = \\left(- \\frac {1}{2}, \\frac {1}{2}, - \\frac {1}{2}\\right), \\overrightarrow {B C} = (- 1, 0, 0),\n$$\n\n所以 $\\left\\{\\begin{aligned}\\overrightarrow{n}\\cdot\\overrightarrow{BC}&=0\\\\\\overrightarrow{n}\\cdot\\overrightarrow{PC}&=0\\end{aligned}\\right.$\n\n所以 $\\left\\{\\begin{aligned}-x&=0\\\\-\\frac{1}{2}x+\\frac{1}{2}y-\\frac{1}{2}z&=0\\end{aligned}\\right.$\n\n令y=1，则z=1,x=0，所以 $\\overrightarrow{n}=(0,1,1)$ ,\n\n设直线AP与平面PBC所成角为 $\\theta$ ,\n\n所以 $\\sin \\theta = \\frac{\\left|\\overrightarrow{PA} \\cdot \\overrightarrow{n}\\right|}{\\left|\\overrightarrow{PA}\\right| \\cdot \\left|\\overrightarrow{n}\\right|} = \\frac{1}{\\sqrt{2} \\times \\frac{\\sqrt{3}}{2}} = \\frac{\\sqrt{6}}{3}$ ，所以 $\\theta = \\arcsin \\frac{\\sqrt{6}}{3}$ ；\n\n(3) 因为异面直线AP与 $D_{1}B_{1}$ 所成角为 $\\frac{\\pi}{4}$ ， $\\overrightarrow{PA}=(1-\\lambda,-\\lambda,\\lambda-1)$ ， $B_{1}(1,1,1)$ ， $D_{1}(0,0,1)$\n\n所以 $\\overrightarrow{D_1B_1} = (1,1,0)$ ， $\\cos \\frac{\\pi}{4} = \\frac{\\left|\\overrightarrow{PA}\\cdot\\overrightarrow{D_1B_1}\\right|}{\\left|\\overrightarrow{PA}\\right|\\cdot\\left|\\overrightarrow{D_1B_1}\\right|} = \\frac{|1 - 2\\lambda|}{\\sqrt{2}\\times\\sqrt{2(1 - \\lambda)^2 + \\lambda^2}} = \\frac{\\sqrt{2}}{2},$\n\n所以 $\\lambda^2 = 1, \\lambda = 1$\n\n\n---"
+    },
+    {
+      "id": "061",
+      "heading": "061 · 原第17题",
+      "source": "S043 · 复旦大学附属复兴中学 · 高二 · 2025-2026 · 期中 · 原第17题",
+      "skill": "正方体中计算异面直线所成角及二面角。并分析相关参数与取值。",
+      "revision": "",
+      "stem": "如图，在正方体 $A B C D - A _ { 1 } B _ { 1 } C _ { 1 } D _ { 1 }$ 中.\n\n![](../assets/a5f9618d8db68344bb76e293.jpg)\n\n(1) 求异面直线 $A _ { 1 } C$ 和BD所成角的大小；\n\n(2) 求二面角 $B - A _ { 1 } C - D$ 的大小.",
+      "answer": "(1) $\\frac { \\pi } { 2 }$\n\n(2) $\\frac { \\stackrel {  } { 2 } \\pi } { 3 }$",
+      "analysis": "(1)\n\n![](../assets/e844632bbfbf40cb51e639a3.jpg)\n\n不妨设正方体边长为1，以D为坐标原点， $\\overrightarrow { D A } , \\overrightarrow { D C } , \\overrightarrow { D D _ { 1 } }$ 分别为 $x , y ,$ z轴正方向建立空间直角坐标系，则 $A _ { 1 } \\left( 1 , 0 , 1 \\right)$ , C (0, 1, 0), D (0, 0, 0), $B \\left( 1 , 1 , 0 \\right)$ .\n\n从而 ${ \\overrightarrow { | A _ { 1 } C } } = ( - 1 , 1 , - 1 ) , { \\overrightarrow { B D } } = ( - 1 , - 1 , 0 )$\n\n由于 $= \\overrightarrow { A _ { 1 } C } \\cdot \\overrightarrow { B D } = 1 - 1 = 0 ,$ 故 $\\overrightarrow { A _ { 1 } C } \\bot \\overrightarrow { B D } .$ 所以异面直线 $A _ { 1 }$ C和BD所成角的大小为 $\\frac { \\pi } { 2 }$\n\n(2)由（1), $\\overrightarrow { D A _ { 1 } } = ( 1 , 0 , 1 ) , ~ \\overrightarrow { D C } = ( 0 , 1 , 0 ) , ~ \\overrightarrow { C A _ { 1 } } = ( 1 , - 1 , 1 ) , ~ \\overrightarrow { C B } = ( 1 , 0 , 0 ) .$\n\n设平面 $D A _ { 1 }$ C的一个法向 $\\stackrel { \\vartriangle } { \\mathbf { E } \\boldsymbol { \\vec { \\mathbf { u } } } } = ( x , y , z )$ ，则 $\\left\\{ { \\begin{array} { l } { { \\vec { n } } \\cdot { \\vec { D A _ { 1 } } } = x + z = 0 } \\\\ { { \\vec { n } } \\cdot { \\vec { D C } } = y = 0 } \\end{array} } \\right. .$\n\n令 ${ \\boldsymbol { x } } = 1$ ，则z=−1，y=0，古 $\\overrightarrow { \\chi _ { n } } = ( 1 , 0 , - 1 )$\n\n同理：平面 $B A _ { 1 } C$ 的一个法向量 $\\vec { m } = ( 0 , 1 , 1 )$ 2 故$\\cos < \\overrightarrow { m } , \\overrightarrow { n } > = \\frac { \\overrightarrow { m } \\cdot \\overrightarrow { n } } { \\left| \\overrightarrow { m } \\right| \\left| \\overrightarrow { n } \\right| } = \\frac { - 1 } { \\sqrt { 2 } \\cdot \\sqrt { 2 } } = - \\frac { 1 } { 2 } .$\n\n由 $\\mathcal { F } \\overrightarrow { m } = ( 0 , 1 , 1 )$ 朝向二面角 $B - A _ { 1 } C - D$ 的外部， $\\stackrel {  } { n } = ( 1 , 0 , - 1 )$ 朝向二面角 $B - A _ { 1 } C - D$ 的内部，故二面角 $B - A _ { 1 } C - D$ 的余弦值为 $\\cos < \\vec { m } , \\vec { n } > = - \\frac { 1 } { 2 }$ 从而其大小为 $\\frac { 2 \\pi } { 3 }$"
+    }
+  ]
+}
