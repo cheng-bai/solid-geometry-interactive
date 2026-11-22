@@ -1,0 +1,204 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="author" content="chengbai"><title>正方体：看图做题</title><style>
+:root{color-scheme:light;--ink:#20312c;--green:#285e4d;--paper:#f6f4ed;--line:#d9ded4}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Songti SC,STSong,SimSun,serif;line-height:1.85}a{color:var(--green)}
+body.cube-page{min-height:100dvh;display:flex;flex-direction:column}
+.cube-mast{background:#193e33;color:#f5f4ec;display:flex;justify-content:space-between;align-items:end;gap:16px;padding:14px 20px 12px}
+.cube-mast .eyebrow{font:600 12px system-ui;letter-spacing:.16em;color:#afd0bf}
+.cube-mast h1{font-size:clamp(24px,3vw,32px);line-height:1.2;margin:4px 0 0}
+.cube-mast a{color:#f6f4ed;white-space:nowrap}
+.cube-desk{flex:1;display:flex;flex-direction:column;min-height:0;padding:10px 16px 8px;container:reading / inline-size}
+.studio-lead{margin:0 0 8px;color:#4e6259;font-size:15px;line-height:1.5;text-align:start}
+.cube-studio{display:grid;grid-template-columns:minmax(260px,.72fr) minmax(320px,1.08fr);gap:12px;align-items:stretch;flex:1;min-height:440px}
+.cube-view,.cube-problems{background:#fff;border:1px solid var(--line);border-radius:8px;min-width:0;min-height:0}
+.cube-view{display:grid;grid-template-rows:auto minmax(0,1fr);overflow:hidden}
+.cube-view-head,.cube-problems-head{padding:7px 12px 6px}
+.cube-view-head{border-bottom:1px solid var(--line)}
+.cube-view h4,.cube-problems h4{font-size:16px;line-height:1.3;margin:0}
+.cube-view-head p,.cube-problems-head p{margin:2px 0 0;color:#51675b;font-size:13px;line-height:1.45;text-align:start}
+.cube-view iframe{display:block;width:100%;height:100%;border:0;background:#fff}
+.cube-problems{display:grid;grid-template-rows:auto minmax(0,1fr);overflow:hidden;line-height:1.55}
+.cube-problem-list{position:relative;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;min-height:0;padding:0 0 10px}
+.cube-switch{position:sticky;top:0;z-index:1;display:flex;gap:6px;padding:6px 10px;background:#fff;border-bottom:1px solid var(--line)}
+.cube-switch button{font:inherit;color:var(--green);background:#fff;border:1px solid var(--line);border-radius:4px;padding:4px 10px;cursor:pointer}
+.cube-switch button[aria-pressed=true]{background:var(--green);color:#f6f4ed;border-color:var(--green)}
+.cube-switch button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.cube-group{padding:2px 10px 4px;scroll-margin-top:40px}
+.cube-group-title{margin:6px 2px 2px;font-size:15px;color:var(--green)}
+.cube-group-note,.collection-attribution,.collection-meta{margin:0 2px 6px;font-size:13px;line-height:1.5;color:#51675b;text-align:start}
+.collection-problem{border-left-color:#739683}
+.collection-meta{margin:0;padding:0 12px}
+.collection-revision{margin:6px 12px;padding:6px 8px;background:#f6f4ed;border-left:3px solid #739683;font-size:13px;line-height:1.5;color:#3d5348;text-align:start}
+.collection-revision p,.collection-stem p,.collection-body p{margin:.35em 0}
+.collection-stem,.collection-body{padding:0 12px 6px;text-align:start}
+.collection-label{font-weight:bold;color:var(--green)}
+.collection-stem img,.collection-body img,.collection-revision img{max-width:100%;height:auto;display:block;margin:8px auto;background:#fff}
+.collection-stem .katex:has(math[display="block"]),.collection-body .katex:has(math[display="block"]),.collection-revision .katex:has(math[display="block"]){display:block;max-width:100%;margin:.45em 0;overflow-x:auto}
+.cube-problem-list:focus-visible{outline:2px solid var(--green);outline-offset:-2px}
+.cube-problem{border:1px solid var(--line);border-left:3px solid #9db9a5;border-radius:6px;background:#fff;min-width:0}
+.cube-problem+.cube-problem{margin-top:8px}
+.cube-kicker{margin:0;padding:6px 12px 0;font:600 12px/1.35 system-ui,sans-serif;letter-spacing:.04em;color:var(--green)}
+.cube-stem,.cube-answer p{overflow-x:auto}
+.cube-stem,.cube-answer p{text-align:start}
+.cube-stem{margin:0;padding:2px 12px 8px}
+.cube-answer{border-top:1px solid var(--line);background:#fdfdf9}
+.cube-answer summary{padding:6px 12px;cursor:pointer;font-weight:bold;color:var(--green)}
+.cube-answer summary:hover,.cube-answer summary:focus-visible{background:#e8eee7}
+.cube-answer summary:focus-visible{outline:2px solid var(--green);outline-offset:-2px}
+.cube-answer[open] summary{border-bottom:1px solid var(--line)}
+.cube-answer p{margin:0;padding:6px 12px 8px}
+.cube-answer .collection-body p{margin:.35em 0;padding:0}
+.cube-foot{color:#5a6d61;font-size:13px;line-height:1.5;padding:4px 16px 12px}
+.cube-sources{display:none}
+@container reading (inline-size < 700px){
+  .cube-studio{grid-template-columns:1fr;height:auto;min-height:0;flex:none}
+  .cube-view{display:flex;flex-direction:column;height:auto}
+  .cube-view iframe{flex:none;height:min(72dvh,640px)}
+  .cube-problems{display:block;height:auto;overflow:visible}
+  .cube-problem-list{overflow:visible}
+}
+@media(min-width:721px){
+  body.cube-page{height:100dvh;overflow:hidden}
+  .cube-desk{overflow:hidden}
+  .cube-studio{min-height:0}
+}
+@media(max-width:720px){
+  .cube-mast{align-items:flex-start;flex-direction:column;padding:16px}
+  .cube-desk{padding:12px 12px 4px}
+  .cube-studio{grid-template-columns:1fr;height:auto;min-height:0;flex:none}
+  .cube-view{display:flex;flex-direction:column;height:auto}
+  .cube-view iframe{flex:none;height:min(72dvh,640px)}
+  .cube-problems{display:block;height:auto;overflow:visible}
+  .cube-problem-list{overflow:visible}
+}
+</style></head><body class="cube-page"><header class="cube-mast"><div><div class="eyebrow">SOLID GEOMETRY · 一个图形一页</div><h1>正方体：看图做题</h1></div><a href="index.html">返回总览</a></header><main class="cube-desk"><p class="studio-lead">左侧是这一个正方体，可旋转，也可加辅助线与截面。右侧只放用到这个正方体的题目，可在自编例题和汇编题目之间切换。答案默认收起。图中 A′ 对应自编题的 A₁。</p>
+<div class="cube-studio"><div class="cube-view"><div class="cube-view-head"><h4>正方体工作台</h4><p>可旋转并加辅助线。<a href="立体几何图形工作台.html" target="_blank" rel="noopener">独立打开工作台</a></p></div><iframe title="正方体题型图形工作台" src="立体几何图形工作台.html?embed=1#scene=cube"></iframe></div><div class="cube-problems"><div class="cube-problems-head"><h4 id="cube-problems-title">这个正方体的题目</h4><p>线面角可在左侧选「体对角线与底面射影」。</p></div><div id="cube-problem-list" class="cube-problem-list" tabindex="0" role="region" aria-label="正方体题目"></div></div></div></main><p class="cube-foot">本页自编例题与总览原文相同。汇编正方体题来自<a href="https://github.com/cheng-bai/shanghai-math-essay-collection/blob/main/分册/立体几何.md" target="_blank" rel="noopener">上海高中数学大题分类汇编 · 立体几何分册</a>，公开发布不代表对原试题与题图拥有排他版权。题图链到汇编站点，不放进本仓库。</p><div class="cube-sources"><p id="example-3" data-cube-problem="3"><strong>例 3｜线面垂直。</strong> 正方体 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>B</mi><mi>C</mi><mi>D</mi><mo>−</mo><msub><mi>A</mi><mn>1</mn></msub><msub><mi>B</mi><mn>1</mn></msub><msub><mi>C</mi><mn>1</mn></msub><msub><mi>D</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">ABCD-A_1B_1C_1D_1</annotation></semantics></math></span> 中，证明 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><msub><mi>A</mi><mn>1</mn></msub><mo>⊥</mo></mrow><annotation encoding="application/x-tex">AA_1\perp</annotation></semantics></math></span> 平面 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>B</mi><mi>C</mi><mi>D</mi></mrow><annotation encoding="application/x-tex">ABCD</annotation></semantics></math></span>。</p>
+<p data-cube-answer="3"><strong>答案与解析：</strong> 正方体相邻棱互相垂直，故 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><msub><mi>A</mi><mn>1</mn></msub><mo>⊥</mo><mi>A</mi><mi>B</mi></mrow><annotation encoding="application/x-tex">AA_1\perp AB</annotation></semantics></math></span>，<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><msub><mi>A</mi><mn>1</mn></msub><mo>⊥</mo><mi>A</mi><mi>D</mi></mrow><annotation encoding="application/x-tex">AA_1\perp AD</annotation></semantics></math></span>。因为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>B</mi><mo separator="true">,</mo><mi>A</mi><mi>D</mi></mrow><annotation encoding="application/x-tex">AB,AD</annotation></semantics></math></span> 在平面 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>B</mi><mi>C</mi><mi>D</mi></mrow><annotation encoding="application/x-tex">ABCD</annotation></semantics></math></span> 内相交，所以 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><msub><mi>A</mi><mn>1</mn></msub><mo>⊥</mo></mrow><annotation encoding="application/x-tex">AA_1\perp</annotation></semantics></math></span> 平面 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>B</mi><mi>C</mi><mi>D</mi></mrow><annotation encoding="application/x-tex">ABCD</annotation></semantics></math></span>。</p>
+<p id="example-4" data-cube-problem="4"><strong>例 4｜平移找角。</strong> 棱长为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span> 的正方体 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>B</mi><mi>C</mi><mi>D</mi><mo>−</mo><msub><mi>A</mi><mn>1</mn></msub><msub><mi>B</mi><mn>1</mn></msub><msub><mi>C</mi><mn>1</mn></msub><msub><mi>D</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">ABCD-A_1B_1C_1D_1</annotation></semantics></math></span> 中，求异面直线 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>B</mi></mrow><annotation encoding="application/x-tex">AB</annotation></semantics></math></span> 与 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><msub><mi>C</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">BC_1</annotation></semantics></math></span> 所成角。</p>
+<p data-cube-answer="4"><strong>答案与解析：</strong> <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>B</mi></mrow><annotation encoding="application/x-tex">AB</annotation></semantics></math></span> 垂直于正方形 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>C</mi><msub><mi>C</mi><mn>1</mn></msub><msub><mi>B</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">BCC_1B_1</annotation></semantics></math></span> 所在平面，因而垂直于平面内的 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><msub><mi>C</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">BC_1</annotation></semantics></math></span>。所求角为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>π</mi><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac\pi2</annotation></semantics></math></span>。</p>
+<p id="example-5" data-cube-problem="5"><strong>例 5｜线面角。</strong> 棱长为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span> 的正方体中，求体对角线 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><msub><mi>C</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">AC_1</annotation></semantics></math></span> 与底面 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>B</mi><mi>C</mi><mi>D</mi></mrow><annotation encoding="application/x-tex">ABCD</annotation></semantics></math></span> 所成角。</p>
+<p data-cube-answer="5"><strong>答案与解析：</strong> <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">C_1</annotation></semantics></math></span> 在底面的射影为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math></span>，所以线面角为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∠</mi><msub><mi>C</mi><mn>1</mn></msub><mi>A</mi><mi>C</mi></mrow><annotation encoding="application/x-tex">\angle C_1AC</annotation></semantics></math></span>。在直角三角形 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>C</mi><msub><mi>C</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">ACC_1</annotation></semantics></math></span> 中，<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>C</mi><mo>=</mo><msqrt><mn>2</mn></msqrt></mrow><annotation encoding="application/x-tex">AC=\sqrt2</annotation></semantics></math></span>，<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><msub><mi>C</mi><mn>1</mn></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">CC_1=1</annotation></semantics></math></span>，故 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>tan</mi><mo>⁡</mo><mi>θ</mi><mo>=</mo><mfrac><mn>1</mn><msqrt><mn>2</mn></msqrt></mfrac></mrow><annotation encoding="application/x-tex">\tan\theta=\frac1{\sqrt2}</annotation></semantics></math></span>。</p>
+<p id="example-6" data-cube-problem="6"><strong>例 6｜作平面角。</strong> 正方体 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>B</mi><mi>C</mi><mi>D</mi><mo>−</mo><msub><mi>A</mi><mn>1</mn></msub><msub><mi>B</mi><mn>1</mn></msub><msub><mi>C</mi><mn>1</mn></msub><msub><mi>D</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">ABCD-A_1B_1C_1D_1</annotation></semantics></math></span> 中，求二面角 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>−</mo><mi>B</mi><msub><mi>B</mi><mn>1</mn></msub><mo>−</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">A-BB_1-C</annotation></semantics></math></span> 的大小。</p>
+<p data-cube-answer="6"><strong>答案与解析：</strong> 在棱 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><msub><mi>B</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">BB_1</annotation></semantics></math></span> 上取点 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span>。因 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>A</mi><mo>⊥</mo><mi>B</mi><msub><mi>B</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">BA\perp BB_1</annotation></semantics></math></span>、<span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>C</mi><mo>⊥</mo><mi>B</mi><msub><mi>B</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">BC\perp BB_1</annotation></semantics></math></span>，所求平面角为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∠</mi><mi>A</mi><mi>B</mi><mi>C</mi><mo>=</mo><mfrac><mi>π</mi><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\angle ABC=\frac\pi2</annotation></semantics></math></span>。</p>
+<p id="example-10" data-cube-problem="10"><strong>例 10｜正方体外接球。</strong> 棱长为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span> 的正方体的八个顶点都在同一球面上，求球体积。</p>
+<p data-cube-answer="10"><strong>答案与解析：</strong> 正方体中心到各顶点距离相等，故为球心；球半径等于体对角线的一半，即 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><msqrt><mn>3</mn></msqrt></mrow><annotation encoding="application/x-tex">R=\sqrt3</annotation></semantics></math></span>。因此球体积为 <span class="katex"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>4</mn><mn>3</mn></mfrac><mi>π</mi><mo stretchy="false">(</mo><msqrt><mn>3</mn></msqrt><msup><mo stretchy="false">)</mo><mn>3</mn></msup><mo>=</mo><mn>4</mn><msqrt><mn>3</mn></msqrt><mi>π</mi></mrow><annotation encoding="application/x-tex">\frac43\pi(\sqrt3)^3=4\sqrt3\pi</annotation></semantics></math></span>。</p></div>
+<script src="data/cube-collection.js"></script>
+<script>
+(function(){
+  const examples=[['3','线面垂直'],['4','异面直线所成角'],['5','线面角'],['6','二面角'],['10','正方体外接球']];
+  const list=document.getElementById('cube-problem-list');
+  if(!list)return;
+  const switcher=document.createElement('div');
+  switcher.className='cube-switch';
+  switcher.setAttribute('role','tablist');
+  switcher.setAttribute('aria-label','例题分组');
+  const local=document.createElement('section');
+  local.id='cube-local';
+  local.className='cube-group';
+  const localTitle=document.createElement('h5');
+  localTitle.className='cube-group-title';
+  localTitle.textContent='本页例题';
+  const localNote=document.createElement('p');
+  localNote.className='cube-group-note';
+  localNote.textContent='例 3、4、5、6、10 为本页自编，与总览中的原文相同，不是汇编题目。';
+  local.append(localTitle,localNote);
+  for(const [id,topic] of examples){
+    const stem=document.querySelector('[data-cube-problem="'+id+'"]');
+    const answer=document.querySelector('[data-cube-answer="'+id+'"]');
+    if(!stem||!answer)continue;
+    const card=document.createElement('div');
+    card.className='cube-problem';
+    const kicker=document.createElement('p');
+    kicker.className='cube-kicker';
+    kicker.textContent='例 '+id+' · '+topic;
+    const stemClone=stem.cloneNode(true);
+    stemClone.removeAttribute('id');
+    stemClone.classList.add('cube-stem');
+    const repeated=stemClone.querySelector(':scope > strong');
+    if(repeated&&repeated.textContent.startsWith('例')){
+      repeated.remove();
+      while(stemClone.firstChild&&stemClone.firstChild.nodeType===Node.TEXT_NODE&&!stemClone.firstChild.textContent.trim()) stemClone.removeChild(stemClone.firstChild);
+    }
+    const answerClone=answer.cloneNode(true);
+    const label=answerClone.querySelector('strong');
+    if(label&&label.textContent.startsWith('答案'))label.remove();
+    const details=document.createElement('details');
+    details.className='cube-answer';
+    const summary=document.createElement('summary');
+    summary.textContent='答案与解析';
+    details.append(summary,answerClone);
+    card.append(kicker,stemClone,details);
+    local.append(card);
+  }
+  const collection=document.createElement('section');
+  collection.id='cube-collection';
+  collection.className='cube-group';
+  const collectionTitle=document.createElement('h5');
+  collectionTitle.className='cube-group-title';
+  collectionTitle.textContent='汇编题目';
+  const attribution=document.createElement('p');
+  attribution.className='collection-attribution';
+  attribution.append('题目来自');
+  const sourceLink=document.createElement('a');
+  sourceLink.href='https://github.com/cheng-bai/shanghai-math-essay-collection/blob/main/分册/立体几何.md';
+  sourceLink.target='_blank';
+  sourceLink.rel='noopener';
+  sourceLink.textContent='上海高中数学大题分类汇编 · 立体几何分册';
+  attribution.append(sourceLink,'。这里只收题干为正方体的 7 题，不是整册。公开发布不代表对原试题与题图拥有排他版权，权利归相应权利人。题图链到汇编站点，不放进本仓库。');
+  collection.append(collectionTitle,attribution);
+  const items=Array.isArray(window.CUBE_COLLECTION)?window.CUBE_COLLECTION:[];
+  for(const item of items){
+    const card=document.createElement('div');
+    card.className='cube-problem collection-problem';
+    card.dataset.collectionId=item.id;
+    const kicker=document.createElement('p');
+    kicker.className='cube-kicker';
+    kicker.textContent=item.heading;
+    const source=document.createElement('p');
+    source.className='collection-meta';
+    source.textContent='来源：'+item.source;
+    const skill=document.createElement('p');
+    skill.className='collection-meta';
+    const skillLabel=document.createElement('strong');
+    skillLabel.textContent='考点说明：';
+    skill.append(skillLabel,document.createTextNode(item.skill));
+    card.append(kicker,source,skill);
+    if(item.revisionHtml){
+      const revision=document.createElement('div');
+      revision.className='collection-revision';
+      revision.innerHTML=item.revisionHtml;
+      card.append(revision);
+    }
+    const stem=document.createElement('div');
+    stem.className='collection-stem';
+    stem.innerHTML=item.stemHtml;
+    const details=document.createElement('details');
+    details.className='cube-answer';
+    const summary=document.createElement('summary');
+    summary.textContent='答案与解析';
+    const body=document.createElement('div');
+    body.className='collection-body';
+    body.innerHTML='<p class="collection-label">答案</p>'+item.answerHtml+'<p class="collection-label">解析</p>'+item.analysisHtml;
+    details.append(summary,body);
+    card.append(stem,details);
+    collection.append(card);
+  }
+  function showGroup(id){
+    const target=document.getElementById(id);
+    const scrolling=getComputedStyle(list).overflowY!=='visible';
+    if(scrolling) list.scrollTop=Math.max(0,target.offsetTop-switcher.offsetHeight);
+    else target.scrollIntoView({behavior:'instant',block:'start'});
+    for(const button of switcher.querySelectorAll('button')) button.setAttribute('aria-pressed',String(button.getAttribute('aria-controls')===id));
+  }
+  for(const [id,label] of [['cube-local','本页例题'],['cube-collection','汇编题目']]){
+    const button=document.createElement('button');
+    button.type='button';
+    button.setAttribute('role','tab');
+    button.setAttribute('aria-controls',id);
+    button.setAttribute('aria-pressed',String(id==='cube-local'));
+    button.textContent=label;
+    button.addEventListener('click',()=>showGroup(id));
+    switcher.append(button);
+  }
+  list.append(switcher,local,collection);
+})();
+</script>
+</body></html>
