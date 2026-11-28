@@ -165,9 +165,10 @@ function mountSolid(element,{solidId='cube',mathState={},viewState={},lessonStat
  const draw=()=>{if(!alive)throw new Error('组件已销毁');element.innerHTML=renderSolidSVG(model,view,lesson);};
  draw();return {getState:()=>clone({math:{solidId:model.id,...model.parameters},view,lesson}),getModel:()=>clone(model),setMath(next){const target=next.solidId??model.id,{solidId:_,...params}=next;const value=createSolid(target,target===model.id?{...model.parameters,...params}:params);model=value;draw();},setView(next){const value={...view,...next};renderSolidSVG(model,value,lesson);view=value;draw();},setLesson(next){if(Object.keys(next).some(k=>!Object.hasOwn(defaultLesson,k)||typeof next[k]!=='boolean'))throw new TypeError('讲解状态必须为已知布尔项');lesson={...lesson,...next};draw();},reset(){model=createSolid(solidId,mathState);view={...defaultView,...viewState};lesson={...defaultLesson,...lessonState};draw();},destroy(){if(!alive)return;alive=false;element.replaceChildren();}};
 }
-function startGallery(){
+function startGallery(lockedSolid){
  if(!$('stage'))return;
- let id=window.SOLIDS_INITIAL??'cube',math=defaults(id),view={...defaultView},lesson={...defaultLesson},model=createSolid(id),activeGroup='全部';
+ const initialSolid=lockedSolid??window.SOLIDS_INITIAL??'cube';
+ let id=initialSolid,math=defaults(id),view={...defaultView},lesson={...defaultLesson},model=createSolid(id),activeGroup='全部';
  const state=()=>({math:{solidId:id,a:2,b:2,c:2,h:3,R:2,r:1,dx:1,dy:.4,...math},view:clone(view),lesson:clone(lesson)});
  const status=(text,bad=false)=>{$('status').textContent=text;$('status').dataset.error=String(bad);};
  function update(){model=createSolid(id,math);$('stage').innerHTML=renderSolidSVG(model,view,lesson);$('solid-name').textContent=model.name;$('solid-code').textContent=id+' / 1.0.0';$('note').textContent=model.note;$('classification').textContent=model.classification;$('volume').textContent=format(model.metrics.volume);$('area').textContent=format(model.metrics.area);$('approximation').textContent=model.approximation;$('formula').innerHTML=formulas(id).map(o=>`<section><h3>${o.title}</h3><div class="math-scroll">${o.math}</div></section>`).join('');
@@ -177,10 +178,29 @@ function startGallery(){
  }
  function params(){const spec=getSpec(id);$('parameters').replaceChildren();for(const [key,p] of Object.entries(spec.params)){const container=document.createElement('label');container.className='parameter';container.innerHTML=`<span>${p.label} <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>${p.symbol}</mi></math></span><input type="number" step="${p.step}" min="${p.min}" max="${p.max}" value="${math[key]}" aria-label="${p.label}数值"><input type="range" step="${p.step}" min="${p.min}" max="${p.max}" value="${math[key]}" aria-label="${p.label}滑块">`;
  const [number,slider]=container.querySelectorAll('input');number.min=slider.min=Math.min(p.min,math[key]);number.max=slider.max=Math.max(p.max,math[key]);number.step=slider.step='any';const change=source=>{const value=Number(source.value);if(source.value===''||!Number.isFinite(value)||value<Number(number.min)||value>Number(number.max)){status('参数尚未生效：'+p.label+'的界面演示范围为 '+p.min+' 至 '+p.max+'。图中保留上次有效模型。',true);return;}const next={...math,[key]:value};try{createSolid(id,next);}catch(error){status('参数尚未生效：'+error.message+'；图中保留上次有效模型。',true);return;}math=next;number.value=slider.value=value;update();status('参数已更新。体积、面积与模型同步。');};number.addEventListener('input',()=>change(number));slider.addEventListener('input',()=>change(slider));$('parameters').append(container);}}
- function loadScene(scene){getSpec(scene);id=scene;math=defaults(id);view={...defaultView};lesson={...defaultLesson};params();update();status('已载入默认资产。拖动图形可旋转视角。');}
- function restoreHash(){const hash=new URLSearchParams(location.hash.slice(1)),scene=hash.get('scene'),raw=hash.get('state');try{if(raw){const next=JSON.parse(raw);if(!next||!next.math||!next.view||!next.lesson)throw new TypeError('缺少状态分组');const {solidId,...all}=next.math;getSpec(solidId);if(Object.keys(all).some(k=>!['a','b','c','h','R','r','dx','dy'].includes(k)||!Number.isFinite(all[k])))throw new TypeError('无效数学状态');if(Object.keys(next.view).some(k=>!(k in defaultView)||!Number.isFinite(next.view[k])))throw new TypeError('无效视角状态');if(Object.keys(next.lesson).some(k=>!Object.hasOwn(defaultLesson,k)||typeof next.lesson[k]!=='boolean'))throw new TypeError('无效讲解状态');const parameters=Object.fromEntries(Object.keys(getSpec(solidId).params).map(k=>[k,all[k]??defaults(solidId)[k]]));createSolid(solidId,parameters);if(next.view.yaw < -Math.PI||next.view.yaw>Math.PI||next.view.pitch < -1.35||next.view.pitch>1.35||next.view.zoom < .5||next.view.zoom>1.5)throw new RangeError('视角状态越界');renderSolidSVG(createSolid(solidId,parameters),next.view,next.lesson);id=solidId;math=parameters;view={...defaultView,...next.view};lesson={...defaultLesson,...next.lesson};params();update();status('已恢复链接中的数学、视角和讲解状态。');}else if(scene)loadScene(scene);else loadScene(window.SOLIDS_INITIAL??'cube');}catch(error){loadScene(window.SOLIDS_INITIAL??'cube');status('链接状态不可用：'+error.message+'；已恢复默认资产。',true);}}
+ function loadScene(scene){if(lockedSolid && scene!==lockedSolid)return;getSpec(scene);id=scene;math=defaults(id);view={...defaultView};lesson={...defaultLesson};params();update();status('已载入默认资产。拖动图形可旋转视角。');}
+ function restoreHash(){
+  const hash=new URLSearchParams(location.hash.slice(1)),scene=hash.get('scene'),raw=hash.get('state');
+  try{
+   if(raw){
+    const next=JSON.parse(raw);
+    if(!next||!next.math||!next.view||!next.lesson)throw new TypeError('缺少状态分组');
+    const {solidId,...all}=next.math;
+    if(lockedSolid && solidId!==lockedSolid)return;
+    getSpec(solidId);
+    if(Object.keys(all).some(k=>!['a','b','c','h','R','r','dx','dy'].includes(k)||!Number.isFinite(all[k])))throw new TypeError('无效数学状态');
+    if(Object.keys(next.view).some(k=>!(k in defaultView)||!Number.isFinite(next.view[k])))throw new TypeError('无效视角状态');
+    if(Object.keys(next.lesson).some(k=>!Object.hasOwn(defaultLesson,k)||typeof next.lesson[k]!=='boolean'))throw new TypeError('无效讲解状态');
+    const parameters=Object.fromEntries(Object.keys(getSpec(solidId).params).map(k=>[k,all[k]??defaults(solidId)[k]]));
+    createSolid(solidId,parameters);
+    if(next.view.yaw < -Math.PI||next.view.yaw>Math.PI||next.view.pitch < -1.35||next.view.pitch>1.35||next.view.zoom < .5||next.view.zoom>1.5)throw new RangeError('视角状态越界');
+    renderSolidSVG(createSolid(solidId,parameters),next.view,next.lesson);
+    id=solidId;math=parameters;view={...defaultView,...next.view};lesson={...defaultLesson,...next.lesson};params();update();status('已恢复链接中的数学、视角和讲解状态。');
+   }else loadScene(scene||initialSolid);
+  }catch(error){loadScene(initialSolid);status('链接状态不可用：'+error.message+'；已恢复默认资产。',true);}
+ }
  function catalogHTML(){const grid=$('catalog');grid.innerHTML='';for(const item of catalog){if(activeGroup!=='全部'&&item.group!==activeGroup)continue;const card=document.createElement('button');card.className='asset-card';card.dataset.solid=item.id;card.setAttribute('aria-label','选择'+item.name);card.setAttribute('aria-pressed',String(item.id===id));card.innerHTML=renderSolidSVG(createSolid(item.id),defaultView,{...defaultLesson,hidden:false},{width:240,height:165})+`<span>${item.name}</span><small>${item.id}</small>`;card.addEventListener('click',()=>{location.hash='scene='+item.id;});grid.append(card);}}
- document.querySelectorAll('[data-group]').forEach(el=>el.addEventListener('click',()=>{activeGroup=el.dataset.group;document.querySelectorAll('[data-group]').forEach(b=>b.setAttribute('aria-pressed',String(b===el)));catalogHTML();}));
+ if(!lockedSolid)document.querySelectorAll('[data-group]').forEach(el=>el.addEventListener('click',()=>{activeGroup=el.dataset.group;document.querySelectorAll('[data-group]').forEach(b=>b.setAttribute('aria-pressed',String(b===el)));catalogHTML();}));
  for(const key of ['yaw','pitch','zoom'])$(key).addEventListener('input',()=>{view={...view,[key]:Number($(key).value)};update();status('仅调整视角，数学参数和测度不变。');});
  for(const key of Object.keys(defaultLesson))$(key).addEventListener('change',()=>{lesson={...lesson,[key]:$(key).checked};update();status('仅调整显示，数学参数不变。');});
  $('reset').addEventListener('click',()=>loadScene(id));
@@ -192,7 +212,9 @@ function startGallery(){
  $('link').addEventListener('click',()=>{const hash=new URLSearchParams({scene:id,state:JSON.stringify(state())});location.hash=hash.toString();$('link-value').value=location.href;$('link-box').hidden=false;status('状态链接已生成。请复制；跨设备需同时传送作品包，file 链接不能直接分享。');});
  let drag=null;const stage=$('stage');stage.addEventListener('pointerdown',event=>{if(event.button!==0)return;drag={x:event.clientX,y:event.clientY,yaw:view.yaw,pitch:view.pitch};stage.setPointerCapture(event.pointerId);});stage.addEventListener('pointermove',event=>{if(!drag)return;view={...view,yaw:Math.max(-Math.PI,Math.min(Math.PI,drag.yaw+(event.clientX-drag.x)*.01)),pitch:Math.max(-1.35,Math.min(1.35,drag.pitch+(event.clientY-drag.y)*.01))};update();});const release=()=>{drag=null;};stage.addEventListener('pointerup',release);stage.addEventListener('pointercancel',release);
  stage.addEventListener('keydown',event=>{const map={ArrowLeft:['yaw',-.08],ArrowRight:['yaw',.08],ArrowUp:['pitch',.08],ArrowDown:['pitch',-.08]};if(!map[event.key])return;event.preventDefault();const [k,d]=map[event.key];view={...view,[k]:Math.max(k==='pitch'?-1.35:-Math.PI,Math.min(k==='pitch'?1.35:Math.PI,view[k]+d))};update();});
- window.addEventListener('hashchange',restoreHash);catalogHTML();restoreHash();
+ window.addEventListener('hashchange',restoreHash);
+ if(lockedSolid){$('asset-picker').hidden=true;loadScene(lockedSolid);}else catalogHTML();
+ restoreHash();
  // Explicit read API for reuse / verification, not a synthetic proof or validation flag.
  window.solidsGallery={getState:()=>clone(state()),getModel:()=>clone(model),list:()=>catalog.map(s=>s.id)};
 }
@@ -247,7 +269,7 @@ renderSolidSVG = function(model, view, lesson, options = {}) {
   }
   return original.replace('</svg>', `<g aria-label="题型辅助构造">${overlay}</g></svg>`);
 };
-function installConstructions(){
+function installConstructions(lockedSolid){
   const controls=document.createElement('section');
   controls.className='construction-controls';
   controls.innerHTML=`<h3>题型辅助构造</h3><label for="construction">选择构造</label><select id="construction"><option value="none">基础几何体</option><optgroup label="正方体"><option value="projection">体对角线与底面射影</option><option value="midpoints">三角形中位线</option><option value="section">平行底面的截面</option></optgroup><optgroup label="正四面体"><option value="tetra-line">侧棱与底面所成的角</option><option value="tetra-dihedral">侧面与底面的二面角</option></optgroup><optgroup label="正四棱锥"><option value="pyramid-line">侧棱与底面所成的角</option><option value="pyramid-dihedral">侧面与底面的二面角</option></optgroup></select><label id="height-label" hidden>截面高度 <input id="section-height" type="range" min="0" max="1" step="0.01" value="0.5"><output id="section-value">50%</output></label><p id="construction-note">可切换其他几何体，调整视角并导出当前 SVG。</p>`;
@@ -255,10 +277,18 @@ function installConstructions(){
   controls.after(document.querySelector('#asset-picker'));
   const select=controls.querySelector('select'),slider=controls.querySelector('input');
   const notes={none:'可切换其他几何体，调整视角并导出当前 SVG。',projection:'红实线为 AC′，虚线为射影 AC 与垂线 CC′；用于观察线面角。',midpoints:'M、N 分别为 AB、AD 的中点，MN ∥ BD；用于观察中位线。',section:'截面与底面平行；滑块的 0% 与 100% 分别对应下底面和上底面。','tetra-line':'O 为正三角形 ABC 的中心，SO 垂直底面；∠SAO 是侧棱 SA 与底面所成的角。','pyramid-line':'O 为正方形 ABCD 的中心，SO 垂直底面；∠SAO 是侧棱 SA 与底面所成的角。','tetra-dihedral':'M 为 AB 中点，O 为底面中心；SM、OM 均垂直 AB，∠SMO 是侧面 SAB 与底面的二面角的平面角。','pyramid-dihedral':'M 为 AB 中点，O 为底面中心；SM、OM 均垂直 AB，∠SMO 是侧面 SAB 与底面的二面角的平面角。'};
+  if(lockedSolid){
+    for(const option of select.querySelectorAll('optgroup option')){
+      if(constructionModels[option.value]!==lockedSolid)option.remove();
+    }
+    for(const group of select.querySelectorAll('optgroup:empty'))group.remove();
+    notes.none='本页固定此几何体，可调整视角并导出当前 SVG。';
+    controls.querySelector('#construction-note').textContent=notes.none;
+  }
   function refresh(){document.querySelector('#yaw').dispatchEvent(new Event('input'));}
   select.addEventListener('change',()=>{
-    construction=select.value;
-    if(construction !== 'none' && window.solidsGallery.getState().math.solidId !== constructionModels[construction]) location.hash='scene='+constructionModels[construction];
+    construction=select.value||'none';
+    if(!lockedSolid && construction !== 'none' && window.solidsGallery.getState().math.solidId !== constructionModels[construction]) location.hash='scene='+constructionModels[construction];
     controls.querySelector('#height-label').hidden=construction!=='section';
     controls.querySelector('#construction-note').textContent=notes[construction];
     const labels=document.querySelector('#labels');
@@ -269,5 +299,9 @@ function installConstructions(){
   window.addEventListener('hashchange',()=>{if(construction!=='none' && window.solidsGallery.getState().math.solidId!==constructionModels[construction]){construction='none';select.value='none';controls.querySelector('#height-label').hidden=true;controls.querySelector('#construction-note').textContent=notes.none;}else if(construction!=='none'){const labels=document.querySelector('#labels');if(!labels.checked)labels.click();refresh();}});
 }
 
-if(typeof document!=='undefined'){startGallery();installConstructions();}
+if(typeof document!=='undefined'){
+ const lock=new URLSearchParams(location.search).get('lock');
+ const lockedSolid=lock===null?null:(catalog.find(item=>item.id===lock)?.id??window.SOLIDS_INITIAL??'cube');
+ startGallery(lockedSolid);installConstructions(lockedSolid);
+}
 </script></body></html>
